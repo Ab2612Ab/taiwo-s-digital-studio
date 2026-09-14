@@ -3,17 +3,17 @@ import { PORTFOLIO_RESOURCES } from "@/lib/portfolio-resources";
 export function DeveloperPortrait() {
   return (
     <div className="relative overflow-hidden rounded-[2rem] border border-border p-1" style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-elegant)" }}>
-      <div className="relative min-h-[22rem] overflow-hidden rounded-[1.85rem] bg-[#0d1117] sm:min-h-[26rem]">
+      <div className="relative min-h-[22rem] overflow-hidden rounded-[1.85rem] bg-[#17120e] sm:min-h-[26rem]">
         <img
           src={PORTFOLIO_RESOURCES.heroWorkspaceBackground}
-          alt="Developer workspace with a coding monitor and desk setup"
+          alt="Warm cinematic creative studio environment"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-95"
-          width={1200}
-          height={900}
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          width={640}
+          height={720}
         />
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-[#07101d]/10 via-[#07101d]/20 to-[#05080d]/70" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/60 to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-black/5 via-black/10 to-black/55" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-black/20" />
 
         <div className="relative z-10 flex h-full min-h-[22rem] items-end justify-center px-4 pt-10 sm:min-h-[26rem]">
           <img

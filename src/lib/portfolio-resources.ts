@@ -1,5 +1,5 @@
 import portrait from "@/assets/taiwo-portrait.png";
-import developerWorkspaceBackground from "@/assets/developer-workspace-background.svg";
+import cinematicProfileBackground from "@/assets/cinematic-profile-background.jpg";
 
 /**
  * Central resource map for approved portfolio visual assets.
@@ -8,7 +8,7 @@ import developerWorkspaceBackground from "@/assets/developer-workspace-backgroun
 export const PORTFOLIO_RESOURCES = {
   heroProfile: portrait,
   aboutImage: portrait,
-  heroWorkspaceBackground: developerWorkspaceBackground,
+  heroWorkspaceBackground: cinematicProfileBackground,
   projectImages: {
     "meridian-consulting": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
     "lumen-studio": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
@@ -24,5 +24,5 @@ export const PORTFOLIO_RESOURCES = {
     ux: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=85",
   } as Record<string, string>,
   processImage: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=85",
-  heroWorkspaceImage: developerWorkspaceBackground,
+  heroWorkspaceImage: cinematicProfileBackground,
 } as const;
