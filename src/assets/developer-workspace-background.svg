@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Developer workspace background</title>
+  <desc id="desc">A realistic dark developer workspace with a monitor showing code, keyboard, desk and warm ambient lighting.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101827"/><stop offset=".55" stop-color="#0b1220"/><stop offset="1" stop-color="#070b13"/></linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#242b35"/><stop offset="1" stop-color="#11161d"/></linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#17263a"/><stop offset="1" stop-color="#09111d"/></linearGradient>
+    <linearGradient id="code" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9ed8ff"/><stop offset=".5" stop-color="#d4b5ff"/><stop offset="1" stop-color="#9ff1cb"/></linearGradient>
+    <radialGradient id="lamp"><stop stop-color="#ffdca0" stop-opacity=".45"/><stop offset="1" stop-color="#ffdca0" stop-opacity="0"/></radialGradient>
+    <filter id="shadow"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#wall)"/>
+  <circle cx="1010" cy="185" r="250" fill="url(#lamp)"/>
+  <rect x="70" y="80" width="1060" height="620" rx="28" fill="#0a0f18" opacity=".4" stroke="#ffffff" stroke-opacity=".06"/>
+  <ellipse cx="600" cy="750" rx="530" ry="80" fill="#000" opacity=".55" filter="url(#shadow)"/>
+
+  <!-- monitor -->
+  <rect x="235" y="135" width="730" height="450" rx="24" fill="#202833" stroke="#a9b5c7" stroke-opacity=".16" stroke-width="5"/>
+  <rect x="258" y="158" width="684" height="404" rx="14" fill="url(#screen)"/>
+  <rect x="258" y="158" width="684" height="40" rx="14" fill="#101823"/>
+  <circle cx="286" cy="178" r="7" fill="#e8eef7" opacity=".28"/><circle cx="309" cy="178" r="7" fill="#e8eef7" opacity=".2"/><circle cx="332" cy="178" r="7" fill="#e8eef7" opacity=".14"/>
+  <text x="370" y="183" fill="#dbe7f5" opacity=".42" font-family="monospace" font-size="16">taiwo-emmanuel / digital-studio</text>
+  <rect x="278" y="216" width="108" height="326" rx="8" fill="#0c1522" opacity=".9"/>
+  <text x="300" y="247" fill="#91a2b7" opacity=".55" font-family="monospace" font-size="14">EXPLORER</text>
+  <text x="300" y="278" fill="#c8d5e6" opacity=".62" font-family="monospace" font-size="13">src</text>
+  <text x="314" y="305" fill="#91a2b7" opacity=".48" font-family="monospace" font-size="12">routes</text>
+  <text x="314" y="331" fill="#91a2b7" opacity=".48" font-family="monospace" font-size="12">components</text>
+  <text x="314" y="357" fill="#91a2b7" opacity=".48" font-family="monospace" font-size="12">assets</text>
+  <text x="300" y="401" fill="#c8d5e6" opacity=".58" font-family="monospace" font-size="13">README.md</text>
+  <text x="300" y="429" fill="#c8d5e6" opacity=".58" font-family="monospace" font-size="13">package.json</text>
+  <g font-family="monospace" font-size="14">
+    <text x="410" y="245" fill="#778ba5" opacity=".65">01</text><text x="445" y="245" fill="url(#code)" opacity=".82">const portfolio = &#123;</text>
+    <text x="410" y="276" fill="#778ba5" opacity=".65">02</text><text x="445" y="276" fill="#c9d8ea" opacity=".72">name: "Taiwo Emmanuel",</text>
+    <text x="410" y="307" fill="#778ba5" opacity=".65">03</text><text x="445" y="307" fill="#c9d8ea" opacity=".72">role: "Web Designer &amp; Developer",</text>
+    <text x="410" y="338" fill="#778ba5" opacity=".65">04</text><text x="445" y="338" fill="#c9d8ea" opacity=".72">stack: ["React", "TypeScript"],</text>
+    <text x="410" y="369" fill="#778ba5" opacity=".65">05</text><text x="445" y="369" fill="#c9d8ea" opacity=".72">responsive: true,</text>
+    <text x="410" y="400" fill="#778ba5" opacity=".65">06</text><text x="445" y="400" fill="url(#code)" opacity=".82">&#125;;</text>
+    <text x="410" y="445" fill="#778ba5" opacity=".65">07</text><text x="445" y="445" fill="#b8c8dc" opacity=".6">// build • test • launch</text>
+    <rect x="445" y="472" width="270" height="8" rx="4" fill="#7dc6ff" opacity=".22"/>
+    <rect x="445" y="472" width="184" height="8" rx="4" fill="#b8e5ff" opacity=".52"/>
+  </g>
+  <!-- monitor stand -->
+  <path d="M555 585h90v95h-90z" fill="#151b23"/><path d="M500 680h200l48 38H452z" fill="#1b222c" stroke="#a9b5c7" stroke-opacity=".08" stroke-width="4"/>
+
+  <!-- desk -->
+  <path d="M0 700h1200v200H0z" fill="url(#desk)"/>
+  <rect y="700" width="1200" height="18" fill="#303844"/>
+  <!-- keyboard -->
+  <g transform="translate(390 735) skewX(-10)"><rect width="430" height="105" rx="18" fill="#0b1017" stroke="#c2ccda" stroke-opacity=".14" stroke-width="3"/>
+    <g fill="#dce4ef" opacity=".2">
+      <rect x="22" y="18" width="35" height="18" rx="4"/><rect x="66" y="18" width="35" height="18" rx="4"/><rect x="110" y="18" width="35" height="18" rx="4"/><rect x="154" y="18" width="35" height="18" rx="4"/><rect x="198" y="18" width="35" height="18" rx="4"/><rect x="242" y="18" width="35" height="18" rx="4"/><rect x="286" y="18" width="35" height="18" rx="4"/><rect x="330" y="18" width="35" height="18" rx="4"/><rect x="374" y="18" width="35" height="18" rx="4"/>
+      <rect x="22" y="44" width="48" height="18" rx="4"/><rect x="76" y="44" width="35" height="18" rx="4"/><rect x="120" y="44" width="35" height="18" rx="4"/><rect x="164" y="44" width="35" height="18" rx="4"/><rect x="208" y="44" width="35" height="18" rx="4"/><rect x="252" y="44" width="35" height="18" rx="4"/><rect x="296" y="44" width="35" height="18" rx="4"/><rect x="340" y="44" width="69" height="18" rx="4"/>
+      <rect x="22" y="70" width="58" height="18" rx="4"/><rect x="86" y="70" width="58" height="18" rx="4"/><rect x="150" y="70" width="145" height="18" rx="4"/><rect x="301" y="70" width="48" height="18" rx="4"/><rect x="355" y="70" width="54" height="18" rx="4"/>
+    </g>
+  </g>
+  <!-- mouse and desk light -->
+  <ellipse cx="930" cy="780" rx="48" ry="66" fill="#111821" stroke="#d7e1ee" stroke-opacity=".13" stroke-width="3"/><path d="M930 720v45" stroke="#cfe2f7" stroke-opacity=".2" stroke-width="3"/>
+  <path d="M1010 700v-170" stroke="#c9d0da" stroke-opacity=".28" stroke-width="12"/><path d="M1008 545c-60 0-92 30-92 74h184c0-44-32-74-92-74z" fill="#202733" stroke="#d9e1eb" stroke-opacity=".12" stroke-width="4"/><ellipse cx="1008" cy="619" rx="110" ry="75" fill="#ffdca0" opacity=".09" filter="url(#soft)"/>
+  <!-- foreground blur / vignette -->
+  <rect width="1200" height="900" fill="url(#wall)" opacity=".16"/>
+  <rect x="24" y="24" width="1152" height="852" rx="34" fill="none" stroke="#ffffff" stroke-opacity=".05" stroke-width="2"/>
+</svg>
