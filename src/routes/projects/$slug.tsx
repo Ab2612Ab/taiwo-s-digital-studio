@@ -2,135 +2,14 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { PORTFOLIO_RESOURCES } from "@/lib/portfolio-resources";
-
-const PROJECTS = {
-  "meridian-consulting": {
-    name: "Meridian Consulting",
-    tag: "Business Website",
-    body: "A multi-page site for a consulting practice with service breakdowns, case summaries and a booking-first contact flow.",
-    detail: ["5 pages", "Responsive", "Lead form"],
-  },
-  "lumen-studio": {
-    name: "Lumen Studio",
-    tag: "Landing Page",
-    body: "A single-scroll launch page built around one offer, with sectioned proof, pricing clarity and a persistent call to action.",
-    detail: ["One-page", "Animation", "CTA focus"],
-  },
-  "northside-fitness": {
-    name: "Northside Fitness",
-    tag: "Redesign",
-    body: "Rebuild of a dated gym site: new visual system, simplified class schedule and a mobile-first membership sign-up path.",
-    detail: ["Redesign", "Mobile-first", "Schedule UI"],
-  },
-  "crate-and-co": {
-    name: "Crate & Co.",
-    tag: "E-commerce UI",
-    body: "Storefront interface work covering product grids, filtering and a streamlined checkout layout designed to reduce drop-off.",
-    detail: ["Catalogue", "Filters", "Checkout"],
-  },
-  "atlas-dashboard": {
-    name: "Atlas Dashboard",
-    tag: "UI/UX",
-    body: "An admin interface concept with dense data tables, clear states and a component set that scales across screen sizes.",
-    detail: ["Design system", "Data tables", "Dark mode"],
-  },
-  "verde-interiors": {
-    name: "Verde Interiors",
-    tag: "Portfolio",
-    body: "A gallery-led portfolio for an interior design practice, prioritising imagery, whitespace and quiet, confident navigation.",
-    detail: ["Gallery", "Typography", "Enquiries"],
-  },
+import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
+const PROJECTS={
+ "meridian-consulting":{name:"Meridian Consulting",tag:"Business Website",body:"A multi-page site for a consulting practice with service breakdowns, case summaries and a booking-first contact flow.",detail:["5 pages","Responsive","Lead form"]},
+ "lumen-studio":{name:"Lumen Studio",tag:"Landing Page",body:"A single-scroll launch page built around one offer, with sectioned proof, pricing clarity and a persistent call to action.",detail:["One-page","Animation","CTA focus"]},
+ "northside-fitness":{name:"Northside Fitness",tag:"Redesign",body:"Rebuild of a dated gym site: new visual system, simplified class schedule and a mobile-first membership sign-up path.",detail:["Redesign","Mobile-first","Schedule UI"]},
+ "crate-and-co":{name:"Crate & Co.",tag:"E-commerce UI",body:"Storefront interface work covering product grids, filtering and a streamlined checkout layout designed to reduce drop-off.",detail:["Catalogue","Filters","Checkout"]},
+ "atlas-dashboard":{name:"Atlas Dashboard",tag:"UI/UX",body:"An admin interface concept with dense data tables, clear states and a component set that scales across screen sizes.",detail:["Design system","Data tables","Dark mode"]},
+ "verde-interiors":{name:"Verde Interiors",tag:"Portfolio",body:"A gallery-led portfolio for an interior design practice, prioritising imagery, whitespace and quiet, confident navigation.",detail:["Gallery","Typography","Enquiries"]},
 } as const;
-
-export const Route = createFileRoute("/projects/$slug")({
-  loader: ({ params }) => {
-    const project = PROJECTS[params.slug as keyof typeof PROJECTS];
-    if (!project) throw notFound();
-    return project;
-  },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.name ?? "Project"} | Taiwo Emmanuel` },
-      {
-        name: "description",
-        content: loaderData?.body ?? "Project case study by Taiwo Emmanuel.",
-      },
-    ],
-  }),
-  component: ProjectCaseStudy,
-});
-
-function ProjectCaseStudy() {
-  const project = Route.useLoaderData();
-  const slug = Route.useParams().slug;
-  const image = PORTFOLIO_RESOURCES.projectImages[slug];
-
-  return (
-    <main className="min-h-screen bg-background text-foreground px-5 py-10 md:py-16">
-      <div className="mx-auto max-w-5xl">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-          <ArrowLeft className="size-4" /> Back to portfolio
-        </Link>
-
-        <Reveal>
-          <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card/60">
-            {image ? (
-              <img src={image} alt={`${project.name} project preview`} className="h-auto w-full object-cover" />
-            ) : (
-              <div className="flex min-h-64 items-center justify-center bg-card px-6 text-center">
-                <div>
-                  <p className="text-sm font-semibold">Project image not supplied</p>
-                  <p className="mt-2 max-w-md text-sm text-muted-foreground">
-                    This case study is ready for the approved project screenshot to be connected through the central resource configuration.
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        </Reveal>
-
-        <Reveal delay={80} className="mt-10">
-          <p className="text-sm font-medium text-primary">{project.tag}</p>
-          <h1 className="mt-3 text-4xl font-extrabold sm:text-5xl">{project.name}</h1>
-          <p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{project.body}</p>
-
-          <div className="mt-8 flex flex-wrap gap-2">
-            {project.detail.map((item) => (
-              <span key={item} className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground">
-                {item}
-              </span>
-            ))}
-          </div>
-        </Reveal>
-
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          <Reveal>
-            <section className="rounded-2xl border border-border bg-card/50 p-6">
-              <h2 className="text-lg font-semibold">Project overview</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.body}</p>
-            </section>
-          </Reveal>
-          <Reveal delay={80}>
-            <section className="rounded-2xl border border-border bg-card/50 p-6">
-              <h2 className="text-lg font-semibold">Available information</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                This case study only uses information already present in the portfolio. No client results, metrics, technologies or live links are invented.
-              </p>
-            </section>
-          </Reveal>
-        </div>
-
-        <div className="mt-10">
-          <Link
-            to="/"
-            hash="contact"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground"
-            style={{ background: "var(--gradient-primary)" }}
-          >
-            Discuss a similar project <ArrowUpRight className="size-4" />
-          </Link>
-        </div>
-      </div>
-    </main>
-  );
-}
+export const Route=createFileRoute("/projects/$slug")({loader:({params})=>{const project=PROJECTS[params.slug as keyof typeof PROJECTS];if(!project)throw notFound();return project},head:({loaderData})=>({meta:[{title:`${loaderData?.name??"Project"} | Taiwo Emmanuel`},{name:"description",content:loaderData?.body??"Project case study by Taiwo Emmanuel."}]}),component:CaseStudy});
+function CaseStudy(){const project=Route.useLoaderData();const slug=Route.useParams().slug;const image=PORTFOLIO_RESOURCES.projectImages[slug];return <div className="min-h-screen bg-background text-foreground"><SiteHeader/><main className="px-5 pb-20 pt-32 md:pt-40"><div className="mx-auto max-w-5xl"><Link to="/projects" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"><ArrowLeft className="size-4"/>Back to projects</Link><Reveal><div className="mt-10 overflow-hidden rounded-3xl border border-border bg-card/60">{image?<img src={image} alt={`${project.name} project preview`} className="h-auto w-full object-cover"/>:<div className="flex min-h-64 items-center justify-center bg-card px-6 text-center"><div><p className="text-sm font-semibold">Project image not supplied</p><p className="mt-2 max-w-md text-sm text-muted-foreground">This case study is ready for the approved project screenshot to be connected through the central resource configuration.</p></div></div>}</div></Reveal><Reveal delay={80} className="mt-10"><p className="text-sm font-medium text-primary">{project.tag}</p><h1 className="mt-3 text-4xl font-extrabold sm:text-5xl">{project.name}</h1><p className="mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">{project.body}</p><div className="mt-8 flex flex-wrap gap-2">{project.detail.map(item=><span key={item} className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground">{item}</span>)}</div></Reveal><div className="mt-16 grid gap-6 md:grid-cols-2"><Reveal><section className="rounded-2xl border border-border bg-card/50 p-6"><h2 className="text-lg font-semibold">Project overview</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.body}</p></section></Reveal><Reveal delay={80}><section className="rounded-2xl border border-border bg-card/50 p-6"><h2 className="text-lg font-semibold">Available information</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">This case study only uses information already present in the portfolio. No client results, metrics, technologies or live links are invented.</p></section></Reveal></div><Link to="/contact" className="mt-10 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground" style={{background:"var(--gradient-primary)"}}>Discuss a similar project <ArrowUpRight className="size-4"/></Link></div></main><SiteFooter/></div>}
