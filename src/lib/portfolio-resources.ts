@@ -1,13 +1,14 @@
 import portrait from "@/assets/taiwo-portrait.png";
+import developerWorkspaceBackground from "@/assets/developer-workspace-background.svg";
 
 /**
- * Central resource map for approved visual assets.
- * The photography below uses stable, direct image assets from Unsplash's CDN.
- * Keeping them centralized makes future replacement straightforward.
+ * Central resource map for approved portfolio visual assets.
+ * Local assets are imported here so Vite bundles them into production builds.
  */
 export const PORTFOLIO_RESOURCES = {
   heroProfile: portrait,
   aboutImage: portrait,
+  heroWorkspaceBackground: developerWorkspaceBackground,
   projectImages: {
     "meridian-consulting": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
     "lumen-studio": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
@@ -23,5 +24,5 @@ export const PORTFOLIO_RESOURCES = {
     ux: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=85",
   } as Record<string, string>,
   processImage: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1400&q=85",
-  heroWorkspaceImage: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85",
+  heroWorkspaceImage: developerWorkspaceBackground,
 } as const;
