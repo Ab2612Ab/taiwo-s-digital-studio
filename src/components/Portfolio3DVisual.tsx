@@ -1,42 +1,43 @@
-import type { ReactNode } from "react";
+import { PORTFOLIO_RESOURCES } from "@/lib/portfolio-resources";
 
 type VisualKind = "hero" | "about" | "design" | "development" | "business" | "ux" | "project" | "process";
 type ProjectVariant = "meridian" | "lumen" | "northside" | "crate" | "atlas" | "verde";
 
-const palettes: Record<VisualKind, [string, string, string]> = {
-  hero: ["#7c3aed", "#06b6d4", "#f8fafc"], about: ["#0ea5e9", "#8b5cf6", "#f8fafc"], design: ["#ec4899", "#8b5cf6", "#f8fafc"], development: ["#06b6d4", "#2563eb", "#f8fafc"], business: ["#14b8a6", "#3b82f6", "#f8fafc"], ux: ["#f59e0b", "#ec4899", "#f8fafc"], project: ["#6366f1", "#06b6d4", "#f8fafc"], process: ["#8b5cf6", "#14b8a6", "#f8fafc"],
+const projectPhotos: Record<ProjectVariant, { src: string; alt: string }> = {
+  meridian: { src: PORTFOLIO_RESOURCES.projectImages["meridian-consulting"], alt: "Professional business consulting team working together in a modern office" },
+  lumen: { src: PORTFOLIO_RESOURCES.projectImages["lumen-studio"], alt: "Bright modern creative studio workspace with professional desks and natural light" },
+  northside: { src: PORTFOLIO_RESOURCES.projectImages["northside-fitness"], alt: "Professional modern gym with fitness equipment" },
+  crate: { src: PORTFOLIO_RESOURCES.projectImages["crate-and-co"], alt: "Professional product photography of a premium e-commerce product" },
+  atlas: { src: PORTFOLIO_RESOURCES.projectImages["atlas-dashboard"], alt: "Professional analytics and technology workspace" },
+  verde: { src: PORTFOLIO_RESOURCES.projectImages["verde-interiors"], alt: "High-end contemporary interior design with refined furniture and architecture" },
 };
 
-function GlassCard({ x, y, w, h, accent, children }: { x: number; y: number; w: number; h: number; accent: string; children?: ReactNode }) {
-  return <g><rect x={x + 10} y={y + 14} width={w} height={h} rx="18" fill="#020617" opacity=".45" /><rect x={x} y={y} width={w} height={h} rx="18" fill="#0f172a" stroke={accent} strokeOpacity=".55" />{children}</g>;
-}
-
-function BrowserFrame({ accent, children }: { accent: string; children?: ReactNode }) {
-  return <g><rect x="102" y="86" width="456" height="286" rx="24" fill="#020617" opacity=".55" /><rect x="92" y="70" width="456" height="286" rx="24" fill="#0b1220" stroke={accent} strokeOpacity=".65" /><rect x="112" y="94" width="416" height="238" rx="12" fill="#f8fafc" />{children}</g>;
-}
-
-function ProjectVisual({ variant, a, b }: { variant: ProjectVariant; a: string; b: string }) {
-  const gradient = "url(#project-gradient)";
-  const dots = <><circle cx="132" cy="111" r="5" fill="#ef4444" /><circle cx="148" cy="111" r="5" fill="#f59e0b" /><circle cx="164" cy="111" r="5" fill="#22c55e" /></>;
-  if (variant === "atlas") return <BrowserFrame accent={b}>{dots}<rect x="130" y="132" width="92" height="184" rx="8" fill="#0f172a" /><rect x="242" y="132" width="80" height="48" rx="8" fill="#dbeafe" /><rect x="332" y="132" width="80" height="48" rx="8" fill="#cffafe" /><rect x="422" y="132" width="80" height="48" rx="8" fill="#ede9fe" /><rect x="242" y="194" width="260" height="122" rx="8" fill="#e2e8f0" /><path d="M258 286 C290 244 314 270 342 226 S400 252 426 214 S468 246 490 202" fill="none" stroke={b} strokeWidth="7" /><rect x="148" y="146" width="58" height="8" rx="4" fill="#64748b" /></BrowserFrame>;
-  if (variant === "northside") return <BrowserFrame accent="#14b8a6">{dots}<rect x="130" y="132" width="174" height="184" rx="8" fill={gradient} /><rect x="318" y="132" width="184" height="22" rx="8" fill="#0f172a" /><rect x="318" y="170" width="150" height="12" rx="6" fill="#94a3b8" /><rect x="318" y="196" width="164" height="12" rx="6" fill="#cbd5e1" /><rect x="318" y="230" width="82" height="34" rx="17" fill="#14b8a6" /><circle cx="184" cy="224" r="42" fill="#fff" opacity=".85" /><path d="M163 225h42M184 204v42" stroke="#14b8a6" strokeWidth="7" /></BrowserFrame>;
-  if (variant === "crate") return <BrowserFrame accent="#8b5cf6">{dots}<rect x="130" y="132" width="372" height="28" rx="8" fill="#0f172a" /><rect x="130" y="178" width="110" height="112" rx="10" fill="#f1f5f9" /><rect x="252" y="178" width="110" height="112" rx="10" fill="#e2e8f0" /><rect x="374" y="178" width="128" height="112" rx="10" fill="#ede9fe" /><circle cx="185" cy="224" r="30" fill={gradient} /><rect x="270" y="208" width="72" height="8" rx="4" fill="#64748b" /><rect x="394" y="208" width="80" height="8" rx="4" fill="#64748b" /></BrowserFrame>;
-  if (variant === "verde") return <BrowserFrame accent="#22c55e">{dots}<rect x="130" y="132" width="372" height="34" rx="8" fill="#0f172a" /><rect x="130" y="180" width="176" height="136" rx="10" fill={gradient} /><rect x="318" y="180" width="184" height="64" rx="10" fill="#d1fae5" /><rect x="318" y="252" width="184" height="64" rx="10" fill="#e2e8f0" /><circle cx="218" cy="248" r="42" fill="#f8fafc" opacity=".8" /></BrowserFrame>;
-  if (variant === "lumen") return <BrowserFrame accent="#a855f7">{dots}<rect x="130" y="132" width="372" height="184" rx="10" fill="#111827" /><rect x="154" y="160" width="180" height="15" rx="7" fill="#f8fafc" /><rect x="154" y="190" width="220" height="9" rx="4" fill="#94a3b8" /><rect x="154" y="216" width="150" height="9" rx="4" fill="#64748b" /><rect x="154" y="250" width="96" height="32" rx="16" fill={gradient} /><circle cx="428" cy="224" r="58" fill={gradient} /></BrowserFrame>;
-  return <BrowserFrame accent="#3b82f6">{dots}<rect x="130" y="132" width="86" height="184" rx="8" fill="#0f172a" /><rect x="236" y="132" width="266" height="40" rx="8" fill="#dbeafe" /><rect x="236" y="188" width="122" height="128" rx="8" fill="#e2e8f0" /><rect x="374" y="188" width="128" height="58" rx="8" fill="#dbeafe" /><rect x="374" y="258" width="128" height="58" rx="8" fill="#f1f5f9" /></BrowserFrame>;
-}
+const visualPhotos: Record<VisualKind, { src: string; alt: string }> = {
+  hero: { src: PORTFOLIO_RESOURCES.heroWorkspaceImage, alt: "Modern professional creative workspace" },
+  about: { src: PORTFOLIO_RESOURCES.aboutImage, alt: "Portrait of Taiwo Emmanuel, web designer and developer" },
+  design: { src: PORTFOLIO_RESOURCES.serviceImages.design, alt: "Professional designer working on a website design project" },
+  development: { src: PORTFOLIO_RESOURCES.serviceImages.development, alt: "Developer working on code at a professional workstation" },
+  business: { src: PORTFOLIO_RESOURCES.serviceImages.business, alt: "Modern professional business office environment" },
+  ux: { src: PORTFOLIO_RESOURCES.serviceImages.ux, alt: "Professional UX and interface design workspace" },
+  project: { src: PORTFOLIO_RESOURCES.projectImages["atlas-dashboard"], alt: "Professional technology and analytics workspace" },
+  process: { src: PORTFOLIO_RESOURCES.processImage, alt: "Professional creative team collaborating around a table" },
+};
 
 export function Portfolio3DVisual({ kind, className = "", project }: { kind: VisualKind; className?: string; project?: ProjectVariant }) {
-  const [a, b, light] = palettes[kind];
-  const safeProject = project ?? "atlas";
-  return <div className={`relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#050816] ${className}`} aria-hidden="true"><div className="absolute -left-16 -top-16 size-48 rounded-full blur-3xl opacity-30" style={{ background: a }} /><div className="absolute -bottom-20 -right-10 size-56 rounded-full blur-3xl opacity-25" style={{ background: b }} /><svg viewBox="0 0 640 460" className="relative block h-full w-full" role="img"><defs><linearGradient id={`g-${kind}`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={a} /><stop offset="1" stopColor={b} /></linearGradient><linearGradient id="project-gradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={a} /><stop offset="1" stopColor={b} /></linearGradient><filter id={`shadow-${kind}`} x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="20" stdDeviation="18" floodColor="#000" floodOpacity=".55" /></filter></defs><ellipse cx="320" cy="398" rx="230" ry="28" fill="#000" opacity=".5" />
-  {kind === "project" && <g filter={`url(#shadow-${kind})`}><ProjectVisual variant={safeProject} a={a} b={b} /></g>}
-  {kind === "hero" && <g filter={`url(#shadow-${kind})`}><BrowserFrame accent={a}><circle cx="132" cy="111" r="5" fill="#ef4444" /><circle cx="148" cy="111" r="5" fill="#f59e0b" /><circle cx="164" cy="111" r="5" fill="#22c55e" /><rect x="138" y="150" width="175" height="14" rx="7" fill="#0f172a" /><rect x="138" y="178" width="220" height="9" rx="4" fill="#64748b" /><rect x="138" y="202" width="184" height="9" rx="4" fill="#94a3b8" /><rect x="138" y="236" width="100" height="32" rx="16" fill={`url(#g-${kind})`} /><circle cx="430" cy="220" r="62" fill={`url(#g-${kind})`} /></BrowserFrame></g>}
-  {kind === "about" && <g filter={`url(#shadow-${kind})`}><GlassCard x={170} y={92} w={300} h={205} accent={b}><rect x="194" y="118" width="252" height="150" rx="14" fill="#020617" /><circle cx="320" cy="166" r="34" fill={`url(#g-${kind})`} /><rect x="260" y="216" width="120" height="9" rx="4" fill={light} /><rect x="280" y="235" width="80" height="7" rx="3" fill="#64748b" /></GlassCard></g>}
-  {kind === "design" && <g filter={`url(#shadow-${kind})`}><GlassCard x={106} y={88} w={270} h={220} accent={a}><rect x="130" y="116" width="222" height="20" rx="8" fill={light} /><rect x="130" y="158" width="100" height="100" rx="12" fill={`url(#g-${kind})`} /><rect x="246" y="158" width="106" height="14" rx="6" fill="#64748b" /></GlassCard><path d="M390 160 496 102 548 194 442 252Z" fill={`url(#g-${kind})`} opacity=".9" /><circle cx="455" cy="164" r="22" fill="#fff" /></g>}
-  {kind === "development" && <g filter={`url(#shadow-${kind})`}><BrowserFrame accent={b}><circle cx="132" cy="111" r="5" fill="#ef4444" /><circle cx="148" cy="111" r="5" fill="#f59e0b" /><circle cx="164" cy="111" r="5" fill="#22c55e" /><rect x="138" y="145" width="126" height="9" rx="4" fill={a} /><rect x="138" y="172" width="220" height="8" rx="4" fill="#64748b" /><rect x="138" y="198" width="180" height="8" rx="4" fill="#94a3b8" /><rect x="138" y="224" width="244" height="8" rx="4" fill="#cbd5e1" /><circle cx="432" cy="218" r="42" fill={`url(#g-${kind})`} /></BrowserFrame></g>}
-  {kind === "business" && <g filter={`url(#shadow-${kind})`}><path d="M130 150 320 76 510 150 320 224Z" fill={`url(#g-${kind})`} /><path d="M130 150 320 224 320 342 130 268Z" fill="#0f172a" stroke={a} strokeOpacity=".5" /><path d="M320 224 510 150 510 268 320 342Z" fill="#111827" stroke={b} strokeOpacity=".5" /><rect x="204" y="190" width="76" height="55" rx="8" fill="#e2e8f0" /><circle cx="320" cy="126" r="30" fill="#fff" /></g>}
-  {kind === "ux" && <g filter={`url(#shadow-${kind})`}><GlassCard x={112} y={90} w={416} h={240} accent={a}><rect x="138" y="120" width="118" height="176" rx="12" fill="#111827" /><circle cx="197" cy="155" r="26" fill={`url(#g-${kind})`} /><rect x="278" y="122" width="220" height="16" rx="7" fill="#e2e8f0" /><rect x="278" y="160" width="180" height="12" rx="6" fill="#475569" /><rect x="278" y="228" width="118" height="38" rx="19" fill={`url(#g-${kind})`} /></GlassCard></g>}
-  {kind === "process" && <g filter={`url(#shadow-${kind})`}>{Array.from({ length: 6 }).map((_, i) => { const x = 105 + i * 86; const y = 230 + Math.sin(i * 1.1) * 65; return <g key={i}><circle cx={x} cy={y} r="22" fill="#0f172a" stroke={i % 2 ? b : a} strokeWidth="3" /><circle cx={x} cy={y} r="9" fill={i % 2 ? b : a} />{i < 5 && <path d={`M${x + 22} ${y} L${x + 64} ${230 + Math.sin((i + 1) * 1.1) * 65}`} stroke="#64748b" strokeWidth="4" strokeDasharray="7 8" />}</g>; })}</g>}
-</svg></div>;
+  const photo = kind === "project" && project ? projectPhotos[project] : visualPhotos[kind];
+
+  return (
+    <div className={`relative overflow-hidden rounded-[2rem] border border-border bg-card ${className}`}>
+      <img
+        src={photo.src}
+        alt={photo.alt}
+        width={1400}
+        height={900}
+        loading={kind === "hero" ? "eager" : "lazy"}
+        decoding="async"
+        className="block h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+    </div>
+  );
 }
