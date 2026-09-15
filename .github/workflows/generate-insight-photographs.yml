@@ -14,8 +14,8 @@ permissions:
   contents: write
 
 concurrency:
-  group: portfolio-main-writer
-  cancel-in-progress: true
+  group: portfolio-main-writer-v3
+  cancel-in-progress: false
 
 jobs:
   generate-and-verify:
