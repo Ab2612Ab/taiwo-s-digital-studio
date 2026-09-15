@@ -72,8 +72,9 @@
     text-align: center;
   }
 
-  main, section, article, aside, header, footer {
-    text-align: center;
+  main, section, article, aside, header, footer,
+  main > *, section > *, article > *, aside > *, header > *, footer > * {
+    text-align: center !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -85,7 +86,7 @@
     margin-right: auto;
   }
 
-  p, li, label, blockquote, figcaption {
+  p, li, label, blockquote, figcaption, span, a, button, input, textarea, select {
     text-align: center;
   }
 
@@ -114,5 +115,6 @@
 header a[href="/"] span:first-child { color: #ffffff !important; }
 header a[href="/"] span:last-child { color: var(--primary) !important; }
 
-/* Keep every major content block centered across desktop, tablet, and mobile. */
+/* Center all content beneath headings, including nested cards and content blocks. */
 .text-left, .text-start { text-align: center !important; }
+[class*="text-left"], [class*="text-start"] { text-align: center !important; }
