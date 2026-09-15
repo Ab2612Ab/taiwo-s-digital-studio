@@ -23,7 +23,7 @@ async function sign(value: string, secret: string) {
 }
 
 async function isAuthenticated(request: Request) {
-  const secret = process.env.ADMIN_SESSION_SECRET;
+  const secret = process.env["ADMIN_SESSION_SECRET"];
   if (!secret) return false;
 
   const cookie = request.headers.get("cookie") ?? "";
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/api/admin")({
           authenticated: true,
           backend: {
             contactApi: true,
-            resendConfigured: Boolean(process.env.RESEND_API_KEY && process.env.CONTACT_FROM_EMAIL && process.env.CONTACT_TO_EMAIL),
+            resendConfigured: Boolean(process.env["RESEND_API_KEY"] && process.env["CONTACT_FROM_EMAIL"] && process.env["CONTACT_TO_EMAIL"]),
           },
           resources: {
             profileImage: true,
@@ -79,8 +79,8 @@ export const Route = createFileRoute("/api/admin")({
           if (action !== "login") return Response.json({ error: "Invalid action." }, { status: 400 });
 
           const password = String(body?.password ?? "");
-          const adminPassword = process.env.ADMIN_PASSWORD;
-          const secret = process.env.ADMIN_SESSION_SECRET;
+          const adminPassword = process.env["ADMIN_PASSWORD"];
+          const secret = process.env["ADMIN_SESSION_SECRET"];
 
           if (!adminPassword || !secret) {
             return Response.json({ error: "Admin panel is not configured yet." }, { status: 503 });

@@ -13,7 +13,7 @@ function Booking() {
   function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget).entries()) as Record<string, string>;
-    const saved: BookingData = { name: data.name || "", email: data.email || "", service: data.service || "", date: data.date || "", time: data.time || "", budget: data.budget || "", note: data.note || "", createdAt: new Date().toISOString() };
+    const saved: BookingData = { name: data["name"] || "", email: data["email"] || "", service: data["service"] || "", date: data["date"] || "", time: data["time"] || "", budget: data["budget"] || "", note: data["note"] || "", createdAt: new Date().toISOString() };
     localStorage.setItem("taiwo-booking", JSON.stringify(saved));
     setBooking(saved);
   }

@@ -40,7 +40,7 @@ export function Reveal({
         const link = document.createElement("a");
         link.href = "/insights";
         link.textContent = "Insights";
-        link.dataset.insightsNav = "true";
+        link.dataset["insightsNav"] = "true";
         link.className = nav.classList.contains("md:hidden")
           ? "py-2 text-sm text-muted-foreground"
           : "text-sm text-muted-foreground hover:text-foreground";
@@ -68,7 +68,7 @@ export function Reveal({
   const renderedChildren = isAboutHeading ? (
     <>
       {firstChild}
-      <div className="mt-8 w-full max-w-4xl">
+      <div className="mt-8 w-full max-w-sm">
         <DeveloperPortrait />
       </div>
       {childList.slice(1)}

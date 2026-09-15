@@ -23,9 +23,9 @@ export const Route = createFileRoute("/api/contact")({
           if (!projectType) return Response.json({ error: "Please select a project type." }, { status: 400 });
           if (!message) return Response.json({ error: "Please enter a message." }, { status: 400 });
 
-          const apiKey = process.env.RESEND_API_KEY;
-          const from = process.env.CONTACT_FROM_EMAIL;
-          const to = process.env.CONTACT_TO_EMAIL;
+          const apiKey = process.env["RESEND_API_KEY"];
+          const from = process.env["CONTACT_FROM_EMAIL"];
+          const to = process.env["CONTACT_TO_EMAIL"];
           if (!apiKey || !from || !to) {
             console.error("Contact form is missing RESEND_API_KEY, CONTACT_FROM_EMAIL, or CONTACT_TO_EMAIL.");
             return Response.json({ error: "Contact form is not configured yet. Please try again later." }, { status: 503 });
