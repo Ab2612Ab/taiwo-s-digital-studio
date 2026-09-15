@@ -1,0 +1,64 @@
+<svg width="1200" height="1400" viewBox="0 0 1200 1400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wall" x1="600" y1="0" x2="600" y2="1400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#202742"/>
+      <stop offset="0.62" stop-color="#151C33"/>
+      <stop offset="1" stop-color="#0A0F20"/>
+    </linearGradient>
+    <radialGradient id="windowGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 350) rotate(135) scale(520 620)">
+      <stop stop-color="#AFC8FF" stop-opacity="0.34"/>
+      <stop offset="0.45" stop-color="#748BC5" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#748BC5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="window" x1="870" y1="150" x2="1040" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C9D8FF" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#667AAE" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#27304B"/>
+      <stop offset="1" stop-color="#0B1020"/>
+    </linearGradient>
+    <filter id="blur24" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <filter id="blur50" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="50"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="1400" fill="url(#wall)"/>
+  <rect width="1200" height="1400" fill="url(#windowGlow)"/>
+
+  <!-- Quiet architectural window/light source -->
+  <rect x="770" y="120" width="310" height="640" rx="18" fill="#0B1020" fill-opacity="0.5"/>
+  <rect x="790" y="140" width="270" height="600" rx="12" fill="url(#window)" stroke="#A8B8E8" stroke-opacity="0.13"/>
+  <path d="M925 140V740M790 440H1060" stroke="#B9C7ED" stroke-opacity="0.08" stroke-width="3"/>
+  <ellipse cx="930" cy="390" rx="190" ry="230" fill="#A8C0FF" fill-opacity="0.08" filter="url(#blur50)"/>
+
+  <!-- Soft wall practical light -->
+  <ellipse cx="300" cy="470" rx="170" ry="220" fill="#8EA8E9" fill-opacity="0.08" filter="url(#blur50)"/>
+  <circle cx="300" cy="400" r="18" fill="#B8C9FF" fill-opacity="0.35" filter="url(#blur24)"/>
+  <circle cx="300" cy="400" r="6" fill="#D7E1FF" fill-opacity="0.38"/>
+
+  <!-- Plant silhouette to make the portrait feel situated in a real room -->
+  <path d="M165 1040C174 875 202 760 246 690C286 625 342 600 382 622C329 664 303 720 293 802C284 878 297 959 320 1040H165Z" fill="#080D1A" fill-opacity="0.8"/>
+  <path d="M210 815C143 768 115 710 124 642C187 664 231 716 238 776L210 815ZM279 742C281 653 325 584 390 556C406 636 371 705 306 757L279 742ZM190 924C119 907 74 861 61 798C132 796 190 833 221 887L190 924ZM292 885C322 795 382 746 458 738C453 814 396 875 315 905L292 885Z" fill="#10172A"/>
+  <path d="M260 690C248 820 246 936 250 1060" stroke="#0A1020" stroke-width="22" stroke-linecap="round"/>
+  <ellipse cx="250" cy="1080" rx="120" ry="30" fill="#070B15" fill-opacity="0.8"/>
+
+  <!-- Desk and restrained studio objects -->
+  <path d="M0 1030H1200V1400H0V1030Z" fill="url(#desk)"/>
+  <path d="M0 1030C260 995 520 1015 770 1030C940 1040 1080 1025 1200 1005V1085C930 1110 590 1080 0 1110V1030Z" fill="#303A57" fill-opacity="0.42"/>
+  <rect x="665" y="940" width="300" height="18" rx="9" fill="#9CAEDD" fill-opacity="0.16"/>
+  <rect x="690" y="790" width="250" height="155" rx="12" fill="#080D19" stroke="#B8C7F0" stroke-opacity="0.1"/>
+  <rect x="708" y="808" width="214" height="119" rx="7" fill="#141C32"/>
+  <rect x="726" y="828" width="120" height="7" rx="3.5" fill="#B9C9F2" fill-opacity="0.14"/>
+  <rect x="726" y="850" width="170" height="6" rx="3" fill="#B9C9F2" fill-opacity="0.08"/>
+  <rect x="726" y="872" width="145" height="6" rx="3" fill="#B9C9F2" fill-opacity="0.06"/>
+  <path d="M780 945L760 1035M850 945L870 1035" stroke="#080D18" stroke-width="12"/>
+
+  <!-- Foreground depth and vignette -->
+  <ellipse cx="610" cy="1220" rx="560" ry="180" fill="#050811" fill-opacity="0.45" filter="url(#blur24)"/>
+  <rect width="1200" height="1400" fill="url(#wall)" fill-opacity="0.08"/>
+  <rect x="0" y="0" width="1200" height="1400" fill="#030611" fill-opacity="0.12"/>
+</svg>
