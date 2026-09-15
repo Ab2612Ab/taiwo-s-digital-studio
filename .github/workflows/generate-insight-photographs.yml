@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/generate-insight-photographs.yml'
       - 'src/routes/insights.tsx'
+      - 'scripts/generate-insight-assets.cjs'
   workflow_dispatch:
 
 permissions:
@@ -32,33 +33,14 @@ jobs:
       - name: Generate eight genuine local Insight photographs
         env:
           GENERATOR_BASE_URL: https://insight-asset-generator-4mqj7q.v2.appdeploy.ai
+          GITHUB_SHA: ${{ github.sha }}
+        run: node scripts/generate-insight-assets.cjs
+
+      - name: Convert and validate generated images
         run: |
           set -euo pipefail
-          assets=(business-website design-mistakes mobile-first performance ux-conversion building-website trust process)
           rm -f /tmp/insight-hashes.txt
-          for asset in "${assets[@]}"; do
-            echo "Generating ${asset}..."
-            node - "${asset}" "${GENERATOR_BASE_URL}" <<'NODE'
-const { chromium } = require('playwright');
-const fs = require('fs');
-const asset = process.argv[2];
-const baseUrl = process.argv[3];
-(async () => {
-  const browser = await chromium.launch({ headless: true, executablePath: '/snap/bin/chromium', args: ['--no-sandbox', '--disable-dev-shm-usage'] });
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1000 }, deviceScaleFactor: 1 });
-  await page.goto(`${baseUrl}/?asset=${encodeURIComponent(asset)}&cacheBust=${process.env.GITHUB_SHA}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await page.waitForFunction(() => {
-    const payload = document.querySelector('#payload');
-    return Boolean(payload && payload.textContent && payload.textContent.trim().length > 0);
-  }, { timeout: 180000 });
-  const payload = await page.locator('#payload').textContent();
-  if (!payload) throw new Error(`Empty generator payload for ${asset}`);
-  fs.writeFileSync(`/tmp/${asset}.json`, payload, 'utf8');
-  const parsed = JSON.parse(payload);
-  if (parsed.error || !parsed.data || !parsed.mimeType) throw new Error(`Generator failed for ${asset}: ${JSON.stringify(parsed).slice(0, 500)}`);
-  await browser.close();
-})().catch(async (error) => { console.error(error); process.exit(1); });
-NODE
+          for asset in business-website design-mistakes mobile-first performance ux-conversion building-website trust process; do
             jq -e '.mimeType and (.bytes > 0) and .data' "/tmp/${asset}.json" >/dev/null
             jq -r '.data' "/tmp/${asset}.json" | base64 --decode > "/tmp/${asset}.source"
             identify "/tmp/${asset}.source"
@@ -96,7 +78,7 @@ NODE
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add src .github/workflows/generate-insight-photographs.yml
+          git add src scripts .github/workflows/generate-insight-photographs.yml
           if git diff --cached --quiet; then exit 0; fi
           git commit -m 'Fix portfolio verification and add local Insight photographs [skip ci]'
           git push
