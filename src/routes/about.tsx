@@ -17,17 +17,17 @@ function About() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <main className="px-5 pb-20 pt-32 md:pt-40">
+      <main className="px-5 pb-20 pt-32 text-center md:pt-40">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-wide text-primary">Taiwo Emmanuel</p>
             <h1 className="mt-3 text-4xl font-extrabold sm:text-5xl">About me</h1>
-            <div className="mt-8 w-full max-w-md">
+            <div className="mx-auto mt-8 w-full max-w-md">
               <DeveloperPortrait />
             </div>
-            <p className="mt-6 text-muted-foreground">Design thinking, development discipline.</p>
+            <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">Design thinking, development discipline.</p>
           </Reveal>
-          <section className="mt-14 max-w-4xl space-y-6 text-base leading-relaxed text-muted-foreground">
+          <section className="mx-auto mt-14 max-w-4xl space-y-6 text-center text-base leading-relaxed text-muted-foreground">
             <p>I'm a web designer and developer who works across both sides of a project — the visual design and the code that ships it. That means fewer handover gaps, and a finished site that behaves the way it was drawn.</p>
             <p>My approach starts with the goal rather than the aesthetic. Who is the page for, what do they need to understand in the first few seconds, and what should they do next? The design follows from those answers: restrained layouts, readable typography and interfaces that stay out of their own way.</p>
             <p>On the development side I care about the things users feel but rarely name — load speed, clean responsive behaviour, tidy interactions on touch as well as desktop. I work closely with clients throughout, keeping the process transparent and the feedback loops short.</p>
