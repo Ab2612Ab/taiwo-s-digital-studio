@@ -20,18 +20,34 @@ jobs:
       - name: Install image validation/conversion tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y imagemagick jq
+          sudo apt-get install -y imagemagick jq chromium-browser || sudo apt-get install -y imagemagick jq chromium
 
       - name: Generate eight genuine local photographs
         env:
           GENERATOR_BASE_URL: https://insight-asset-generator-4mqj7q.v2.appdeploy.ai
         run: |
           set -euo pipefail
-          mkdir -p src/assets/insights/generated
           assets=(business-website design-mistakes mobile-first performance ux-conversion building-website trust process)
           for asset in "${assets[@]}"; do
-            echo "Generating ${asset}..."
-            curl --fail --silent --show-error --retry 3 "${GENERATOR_BASE_URL}/api/generate/${asset}" -o "/tmp/${asset}.json"
+            echo "Generating ${asset} through the AppDeploy image-generation capability..."
+            chromium --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=180000 --dump-dom "${GENERATOR_BASE_URL}/?asset=${asset}" > "/tmp/${asset}.html"
+            python3 - "${asset}" <<'PY'
+          import html
+          import json
+          import re
+          import sys
+          from pathlib import Path
+          asset = sys.argv[1]
+          text = Path(f'/tmp/{asset}.html').read_text(errors='replace')
+          match = re.search(r'<pre[^>]*id=["\']payload["\'][^>]*>(.*?)</pre>', text, re.S)
+          if not match:
+              raise SystemExit(f'No payload returned for {asset}')
+          payload = html.unescape(match.group(1))
+          data = json.loads(payload)
+          if not data.get('data') or not data.get('mimeType') or int(data.get('bytes', 0)) <= 0:
+              raise SystemExit(f'Invalid generated image response for {asset}')
+          Path(f'/tmp/{asset}.json').write_text(json.dumps(data))
+          PY
             mime="$(jq -r '.mimeType' "/tmp/${asset}.json")"
             bytes="$(jq -r '.bytes' "/tmp/${asset}.json")"
             test -n "${mime}" && test "${mime}" != "null"
