@@ -34,15 +34,15 @@ export function Reveal({
   }, []);
 
   const childList = Children.toArray(children);
+  const firstChild = childList[0];
   const isAboutHeading =
-    childList.length > 0 &&
-    isValidElement(childList[0]) &&
-    childList[0].type === "h2" &&
-    childList[0].props.children === "About me";
+    isValidElement<{ children?: ReactNode }>(firstChild) &&
+    firstChild.type === "h2" &&
+    firstChild.props.children === "About me";
 
   const renderedChildren = isAboutHeading ? (
     <>
-      {childList[0]}
+      {firstChild}
       <div className="mt-8 w-full max-w-4xl">
         <DeveloperPortrait />
       </div>
