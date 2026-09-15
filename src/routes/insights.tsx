@@ -65,3 +65,5 @@ function InsightsPage() {
 }
 
 export default InsightsPage;
+
+// Insight article imagery is intentionally stored and served locally as WebP assets.
