@@ -87,7 +87,7 @@ jobs:
             echo 'Old SVG Insight imports remain.'
             exit 1
           fi
-          npm ci
+          npm install --no-audit --no-fund
           npm run build
 
       - name: Commit generated local assets
