@@ -15,7 +15,7 @@
  *
  * To add a new semantic color:
  * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * 2. Register it in @theme inline as --color-<name>: var(--name)
  */
 
 @theme inline {
@@ -64,7 +64,6 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
-
 :root {
   --radius: 0.5rem;
   --background: oklch(0.16 0.018 265);
@@ -104,7 +103,6 @@
   --shadow-elegant: 0 24px 60px -24px color-mix(in oklab, var(--primary) 45%, transparent);
 }
 
-
 .dark {
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
@@ -141,28 +139,14 @@
 }
 
 @layer base {
-  * {
-    border-color: var(--color-border);
-  }
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
+  * { border-color: var(--color-border); }
+  body { background-color: var(--color-background); color: var(--color-foreground); }
 }
 
 @layer base {
-  body {
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-  h1, h2, h3, h4 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-  }
-  html {
-    scroll-behavior: smooth;
-  }
+  body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  html { scroll-behavior: smooth; }
 }
 
 @utility text-gradient {
@@ -176,8 +160,12 @@
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  &[data-visible="true"] {
-    opacity: 1;
-    transform: none;
-  }
+  &[data-visible="true"] { opacity: 1; transform: none; }
+}
+
+/* The portfolio is intentionally single-focus at the top: keep the brand mark,
+   but remove the old page/filter navigation and mobile menu controls. */
+header nav,
+header [aria-label="Toggle menu"] {
+  display: none !important;
 }
