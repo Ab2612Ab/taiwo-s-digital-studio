@@ -50,15 +50,15 @@
   --secondary: oklch(0.18 0.07 260);
   --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.18 0.06 260);
-  --muted-foreground: oklch(0.82 0.015 260);
+  --muted-foreground: oklch(1 0 0);
   --accent: oklch(0.22 0.08 260);
   --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.55 0.22 27);
+  --destructive: oklch(0.57 0.23 260);
   --destructive-foreground: oklch(1 0 0);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 14%);
   --ring: oklch(0.57 0.23 260);
-  --gradient-primary: linear-gradient(135deg, oklch(0.46 0.22 260), oklch(0.68 0.19 258));
+  --gradient-primary: linear-gradient(135deg, oklch(0.46 0.22 260), oklch(0.57 0.23 260));
   --shadow-elegant: 0 24px 60px -24px color-mix(in oklab, var(--primary) 45%, transparent);
 }
 
@@ -69,13 +69,31 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-align: center;
   }
+
+  main, section, article, aside, header, footer {
+    text-align: center;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
-    text-align: center;
+    text-align: center !important;
     color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
   }
+
+  p, li, label, blockquote, figcaption {
+    text-align: center;
+  }
+
+  ul, ol {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+
   html { scroll-behavior: smooth; }
 }
 
@@ -95,3 +113,6 @@
 
 header a[href="/"] span:first-child { color: #ffffff !important; }
 header a[href="/"] span:last-child { color: var(--primary) !important; }
+
+/* Keep every major content block centered across desktop, tablet, and mobile. */
+.text-left, .text-start { text-align: center !important; }
