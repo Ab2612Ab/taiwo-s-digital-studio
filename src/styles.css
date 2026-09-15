@@ -69,6 +69,7 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-align: center;
   }
 
   main, section, article, aside, footer { text-align: center; }
@@ -82,18 +83,24 @@
     margin-right: auto;
   }
 
-  /* All subheadings and supporting headings are centered too. */
   h2, h3, h4, h5, h6,
-  [class*="subtitle"], [class*="subheading"],
-  .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+  [class*="subtitle"], [class*="subheading"] {
     text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  p, li, label, blockquote, figcaption { text-align: center; }
+  p, li, label, blockquote, figcaption {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   ul, ol {
     list-style-position: inside;
     padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   html { scroll-behavior: smooth; }
@@ -126,17 +133,35 @@ header a[href="/"] {
 header a[href="/"] span:first-child { color: #ffffff !important; }
 header a[href="/"] span:last-child { color: var(--primary) !important; }
 
-/* Keep every subheading/content block directly underneath its parent heading. */
+/* Keep all content directly beneath its related heading/subheading and centered. */
 section > div > .reveal,
 section > div > .reveal + div,
 section > div > .reveal ~ div {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+section > div,
+section > div > div,
+section .reveal,
+section .space-y-4,
+section .space-y-6,
+section .space-y-8,
+section .space-y-10,
+section .space-y-12 {
   margin-left: auto;
   margin-right: auto;
 }
 
 section .text-center,
 section .mx-auto {
-  text-align: center;
+  text-align: center !important;
+}
+
+section .text-left,
+section .text-start {
+  text-align: center !important;
 }
 
 section .flex.flex-wrap,
@@ -157,9 +182,12 @@ section li.flex {
   justify-content: center;
 }
 
-section .text-left,
-section .text-start {
-  text-align: center !important;
+section form,
+section form > div,
+section .card,
+section [role="group"] {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 767px) {
