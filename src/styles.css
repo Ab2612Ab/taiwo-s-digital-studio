@@ -163,9 +163,7 @@
   &[data-visible="true"] { opacity: 1; transform: none; }
 }
 
-/* The portfolio is intentionally single-focus at the top: keep the brand mark,
-   but remove the old page/filter navigation and mobile menu controls. */
-header nav,
-header [aria-label="Toggle menu"] {
+/* Keep the six navigation links in the main header only, not in the footer. */
+footer nav {
   display: none !important;
 }
