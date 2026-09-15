@@ -1,0 +1,64 @@
+name: Generate Selected Project Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-selected-project-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install image tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick jq chromium-browser || sudo apt-get install -y imagemagick jq chromium
+
+      - name: Generate six genuine project photographs
+        env:
+          GENERATOR_BASE_URL: https://insight-asset-generator-4mqj7q.v2.appdeploy.ai
+        run: |
+          set -euo pipefail
+          assets=(meridian-consulting lumen-studio northside-fitness crate-and-co atlas-dashboard verde-interiors)
+          for asset in "${assets[@]}"; do
+            chromium --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=180000 --dump-dom "${GENERATOR_BASE_URL}/?asset=${asset}" > "/tmp/${asset}.html"
+            python3 - "${asset}" <<'PY'
+          import html
+          import json
+          import re
+          import sys
+          from pathlib import Path
+          asset = sys.argv[1]
+          text = Path(f'/tmp/{asset}.html').read_text(errors='replace')
+          match = re.search(r'<pre[^>]*id=["\']payload["\'][^>]*>(.*?)</pre>', text, re.S)
+          if not match:
+              raise SystemExit(f'No payload returned for {asset}')
+          data = json.loads(html.unescape(match.group(1)))
+          if not data.get('data') or not data.get('mimeType') or int(data.get('bytes', 0)) <= 0:
+              raise SystemExit(f'Invalid generated image response for {asset}')
+          Path(f'/tmp/{asset}.json').write_text(json.dumps(data))
+          PY
+            jq -r '.data' "/tmp/${asset}.json" | base64 --decode > "/tmp/${asset}.generated"
+            test -s "/tmp/${asset}.generated"
+            identify "/tmp/${asset}.generated"
+            convert "/tmp/${asset}.generated" -strip -quality 88 "src/assets/projects/${asset}.webp"
+            identify "src/assets/projects/${asset}.webp"
+            test -s "src/assets/projects/${asset}.webp"
+          done
+
+      - name: Commit local project photographs
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/assets/projects/*.webp
+          git commit -m 'Add local Selected Projects photographs [skip ci]'
+          git push
