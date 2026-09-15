@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DeveloperPortrait } from "@/components/DeveloperPortrait";
-import { Portfolio3DVisual } from "@/components/Portfolio3DVisual";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
@@ -32,7 +31,6 @@ function About() {
             <p>I'm a web designer and developer who works across both sides of a project — the visual design and the code that ships it. That means fewer handover gaps, and a finished site that behaves the way it was drawn.</p>
             <p>My approach starts with the goal rather than the aesthetic. Who is the page for, what do they need to understand in the first few seconds, and what should they do next? The design follows from those answers: restrained layouts, readable typography and interfaces that stay out of their own way.</p>
             <p>On the development side I care about the things users feel but rarely name — load speed, clean responsive behaviour, tidy interactions on touch as well as desktop. I work closely with clients throughout, keeping the process transparent and the feedback loops short.</p>
-            <Portfolio3DVisual kind="about" className="aspect-[16/7]" />
           </section>
         </div>
       </main>
