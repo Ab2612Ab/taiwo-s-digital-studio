@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Clock3, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
@@ -51,8 +51,10 @@ function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
 }
 
 function InsightsPage() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [category, setCategory] = useState<Category>("All");
   const [query, setQuery] = useState("");
+  if (pathname !== "/insights" && pathname !== "/insights/") return <Outlet />;
   const filtered = useMemo(() => { const q = query.trim().toLowerCase(); return ARTICLES.filter((article) => (category === "All" || article.category === category) && (!q || `${article.title} ${article.description} ${article.category}`.toLowerCase().includes(q))); }, [category, query]);
   const featured = ARTICLES[0];
   return <div className="min-h-screen bg-background text-foreground"><SiteHeader /><main className="px-5 pb-24 pt-32 md:pt-40"><div className="mx-auto max-w-6xl">
