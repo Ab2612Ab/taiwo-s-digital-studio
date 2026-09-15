@@ -32,6 +32,32 @@ export function Reveal({
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || window.location.pathname !== "/") return;
+    const addInsightsLink = () => {
+      document.querySelectorAll("header nav").forEach((nav) => {
+        if (nav.querySelector('[data-insights-nav="true"]')) return;
+        const link = document.createElement("a");
+        link.href = "/insights";
+        link.textContent = "Insights";
+        link.dataset.insightsNav = "true";
+        link.className = nav.classList.contains("md:hidden")
+          ? "py-2 text-sm text-muted-foreground"
+          : "text-sm text-muted-foreground hover:text-foreground";
+        link.addEventListener("click", () => {
+          const toggle = document.querySelector('button[aria-label="Toggle menu"]') as HTMLButtonElement | null;
+          if (toggle && nav.classList.contains("md:hidden")) toggle.click();
+        });
+        const hireMe = Array.from(nav.children).find((child) => child instanceof HTMLAnchorElement && child.textContent?.trim() === "Hire me");
+        nav.insertBefore(link, hireMe ?? null);
+      });
+    };
+    addInsightsLink();
+    const observer = new MutationObserver(addInsightsLink);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, []);
+
   const childList = Children.toArray(children);
   const firstChild = childList[0];
   const isAboutHeading =
