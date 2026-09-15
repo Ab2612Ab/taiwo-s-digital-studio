@@ -1,11 +1,5 @@
 import portrait from "@/assets/taiwo-portrait.png";
 import cinematicProfileEnvironment from "@/assets/cinematic-profile-environment.svg";
-import meridianConsulting from "@/assets/projects/meridian-consulting.svg";
-import lumenStudio from "@/assets/projects/lumen-studio.svg";
-import northsideFitness from "@/assets/projects/northside-fitness.svg";
-import crateAndCo from "@/assets/projects/crate-and-co.svg";
-import atlasDashboard from "@/assets/projects/atlas-dashboard.svg";
-import verdeInteriors from "@/assets/projects/verde-interiors.svg";
 
 /** Central resource map for approved portfolio visual assets. */
 export const PORTFOLIO_RESOURCES = {
@@ -13,12 +7,12 @@ export const PORTFOLIO_RESOURCES = {
   aboutImage: portrait,
   heroWorkspaceBackground: cinematicProfileEnvironment,
   projectImages: {
-    "meridian-consulting": meridianConsulting,
-    "lumen-studio": lumenStudio,
-    "northside-fitness": northsideFitness,
-    "crate-and-co": crateAndCo,
-    "atlas-dashboard": atlasDashboard,
-    "verde-interiors": verdeInteriors,
+    "meridian-consulting": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=85",
+    "lumen-studio": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=85",
+    "northside-fitness": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=85",
+    "crate-and-co": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1400&q=85",
+    "atlas-dashboard": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=85",
+    "verde-interiors": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85",
   } as Record<string, string>,
   serviceImages: {
     design: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85",
