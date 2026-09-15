@@ -23,10 +23,10 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install image and browser verification tools
+      - name: Install image tools and headless browser
         run: |
           sudo apt-get update
-          sudo apt-get install -y imagemagick jq curl chromium
+          sudo apt-get install -y imagemagick jq python3 chromium-browser
 
       - name: Generate eight genuine local Insight photographs
         env:
@@ -37,9 +37,26 @@ jobs:
           rm -f /tmp/insight-hashes.txt
           for asset in "${assets[@]}"; do
             echo "Generating ${asset}..."
-            curl --fail --retry 4 --retry-delay 2 --silent --show-error \
-              "${GENERATOR_BASE_URL}/api/generate/${asset}?cacheBust=${GITHUB_SHA}" \
-              -o "/tmp/${asset}.json"
+            chromium-browser --headless --no-sandbox --disable-dev-shm-usage --disable-gpu \
+              --virtual-time-budget=60000 --dump-dom \
+              "${GENERATOR_BASE_URL}/?asset=${asset}&cacheBust=${GITHUB_SHA}" \
+              > "/tmp/${asset}.html"
+            python3 - "${asset}" <<'PY'
+import html
+import json
+import pathlib
+import sys
+
+asset = sys.argv[1]
+source = pathlib.Path(f'/tmp/{asset}.html').read_text(encoding='utf-8', errors='replace')
+start = source.find('<pre id="payload">')
+end = source.find('</pre>', start)
+if start < 0 or end < 0:
+    raise SystemExit(f'generator payload not found for {asset}')
+payload = html.unescape(source[start + len('<pre id="payload">'):end])
+pathlib.Path(f'/tmp/{asset}.json').write_text(payload, encoding='utf-8')
+json.loads(payload)
+PY
             mime="$(jq -r '.mimeType // empty' "/tmp/${asset}.json")"
             bytes="$(jq -r '.bytes // 0' "/tmp/${asset}.json")"
             data="$(jq -r '.data // empty' "/tmp/${asset}.json")"
