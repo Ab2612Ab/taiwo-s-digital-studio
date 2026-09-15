@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const baseUrl = process.env.GENERATOR_BASE_URL;
 const cacheBust = process.env.GITHUB_SHA || Date.now().toString();
+const chromiumPath = process.env.CHROMIUM_PATH || '/usr/bin/chromium';
 const assets = [
   'business-website',
   'design-mistakes',
@@ -19,7 +20,7 @@ if (!baseUrl) throw new Error('GENERATOR_BASE_URL is required');
 (async () => {
   const browser = await chromium.launch({
     headless: true,
-    executablePath: '/snap/bin/chromium',
+    executablePath: chromiumPath,
     args: ['--no-sandbox', '--disable-dev-shm-usage'],
   });
 
