@@ -13,15 +13,6 @@ const projectPhotos: Record<ProjectVariant, { src: string; alt: string }> = {
   "verde-interiors": { src: PORTFOLIO_RESOURCES.projectImages["verde-interiors"], alt: "Premium contemporary interior architecture and interior design" },
 };
 
-const projectNames: Record<string, ProjectVariant> = {
-  "Meridian Consulting": "meridian-consulting",
-  "Lumen Studio": "lumen-studio",
-  "Northside Fitness": "northside-fitness",
-  "Crate & Co.": "crate-and-co",
-  "Atlas Dashboard": "atlas-dashboard",
-  "Verde Interiors": "verde-interiors",
-};
-
 const visualPhotos: Record<Exclude<VisualKind, "project">, { src: string; alt: string }> = {
   hero: { src: PORTFOLIO_RESOURCES.heroWorkspaceImage, alt: "Modern professional creative workspace" },
   about: { src: PORTFOLIO_RESOURCES.aboutImage, alt: "Portrait of Taiwo Emmanuel, web designer and developer" },
@@ -39,8 +30,16 @@ export function Portfolio3DVisual({ kind, className = "", project }: { kind: Vis
   useEffect(() => {
     if (kind !== "project" || project) return;
     const article = rootRef.current?.closest("article");
-    const projectName = article?.querySelector("h3")?.textContent?.trim() ?? "";
-    const detected = projectNames[projectName];
+    const projectName = article?.querySelector("h2")?.textContent?.trim() ?? "";
+    const names: Record<string, ProjectVariant> = {
+      "Meridian Consulting": "meridian-consulting",
+      "Lumen Studio": "lumen-studio",
+      "Northside Fitness": "northside-fitness",
+      "Crate & Co.": "crate-and-co",
+      "Atlas Dashboard": "atlas-dashboard",
+      "Verde Interiors": "verde-interiors",
+    };
+    const detected = names[projectName];
     if (detected) setDetectedProject(detected);
   }, [kind, project]);
 
@@ -49,11 +48,7 @@ export function Portfolio3DVisual({ kind, className = "", project }: { kind: Vis
     : visualPhotos[kind];
 
   return (
-    <div
-      ref={rootRef}
-      className={`relative overflow-hidden rounded-[2rem] border border-border bg-card ${className}`}
-      data-project-visual={detectedProject ?? "unassigned"}
-    >
+    <div ref={rootRef} className={`relative overflow-hidden rounded-[2rem] border border-border bg-card ${className}`} data-project-visual={detectedProject ?? "unassigned"}>
       {photo ? (
         <img
           src={photo.src}
