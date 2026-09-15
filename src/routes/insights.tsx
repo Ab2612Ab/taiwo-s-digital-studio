@@ -3,7 +3,7 @@ import { ArrowRight, Clock3, Search } from "lucide-react";
 import { useMemo, useState } from "react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { Reveal } from "@/components/Reveal";
-import businessWebsite from "@/assets/insights/business-website-realistic.jpg";
+import businessWebsite from "@/assets/insights/business-website.svg";
 import designMistakes from "@/assets/insights/design-mistakes.webp";
 import mobileFirst from "@/assets/insights/mobile-first.webp";
 import performance from "@/assets/insights/performance.webp";
@@ -16,7 +16,7 @@ export const CATEGORIES = ["All", "Web Design", "Development", "UI/UX", "Busines
 export type Category = (typeof CATEGORIES)[number];
 
 export const ARTICLES = [
-  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers.", image: businessWebsite, imageAlt: "Modern business website displayed on a desktop monitor and laptop" },
+  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers.", image: businessWebsite, imageAlt: "Abstract illustration of a clean business website layout on a browser frame" },
   { slug: "5-website-design-mistakes-that-cost-businesses-customers", title: "5 Website Design Mistakes That Cost Businesses Customers", category: "Web Design", date: "September 9, 2026", reading: "5 min", description: "Five common design problems that create hesitation, confusion or unnecessary friction for visitors.", image: designMistakes, imageAlt: "Web designer working at a modern desktop workstation" },
   { slug: "why-mobile-first-design-matters", title: "Why Mobile-First Design Matters for Modern Businesses", category: "UI/UX", date: "September 5, 2026", reading: "5 min", description: "How starting with smaller screens can produce clearer layouts and better decisions across every device.", image: mobileFirst, imageAlt: "Professional testing responsive website design in a modern workspace" },
   { slug: "website-speed-user-experience", title: "Website Speed: The Hidden Part of a Good User Experience", category: "Performance", date: "August 29, 2026", reading: "6 min", description: "A practical look at the performance details users notice even when they never talk about them.", image: performance, imageAlt: "Developer monitoring a website development workstation" },
