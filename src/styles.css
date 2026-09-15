@@ -82,6 +82,13 @@
     margin-right: auto;
   }
 
+  /* All subheadings and supporting headings are centered too. */
+  h2, h3, h4, h5, h6,
+  [class*="subtitle"], [class*="subheading"],
+  .text-xl, .text-2xl, .text-3xl, .text-4xl, .text-5xl, .text-6xl {
+    text-align: center !important;
+  }
+
   p, li, label, blockquote, figcaption { text-align: center; }
 
   ul, ol {
@@ -119,7 +126,7 @@ header a[href="/"] {
 header a[href="/"] span:first-child { color: #ffffff !important; }
 header a[href="/"] span:last-child { color: var(--primary) !important; }
 
-/* Content directly beneath headings stays together and centered. */
+/* Keep every subheading/content block directly underneath its parent heading. */
 section > div > .reveal,
 section > div > .reveal + div,
 section > div > .reveal ~ div {
@@ -127,7 +134,6 @@ section > div > .reveal ~ div {
   margin-right: auto;
 }
 
-/* Center text blocks, buttons and inline controls beneath headings. */
 section .text-center,
 section .mx-auto {
   text-align: center;
@@ -151,13 +157,11 @@ section li.flex {
   justify-content: center;
 }
 
-/* Prevent utility classes from pulling content back to the left. */
 section .text-left,
 section .text-start {
   text-align: center !important;
 }
 
-/* Mobile navigation remains ordered and centered. */
 @media (max-width: 767px) {
   header nav { text-align: center; }
   header nav a { justify-content: center; text-align: center; }
