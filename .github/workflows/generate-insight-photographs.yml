@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: portfolio-main-writer
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   generate-and-verify:
@@ -29,11 +29,13 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install image tools and browser
+      - name: Install image tooling and Playwright
         run: |
-          sudo apt-get update
-          sudo apt-get install -y imagemagick jq python3 chromium-browser
           npm install --no-save playwright
+          command -v /snap/bin/chromium || command -v chromium || command -v google-chrome
+          command -v convert
+          command -v identify
+          command -v jq
 
       - name: Generate eight genuine local Insight photographs
         env:
