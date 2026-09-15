@@ -22,7 +22,7 @@ function About() {
           <Reveal>
             <p className="text-sm font-medium uppercase tracking-wide text-primary">Taiwo Emmanuel</p>
             <h1 className="mt-3 text-4xl font-extrabold sm:text-5xl">About me</h1>
-            <div className="mt-8 w-full max-w-4xl">
+            <div className="mt-8 w-full max-w-md">
               <DeveloperPortrait />
             </div>
             <p className="mt-6 text-muted-foreground">Design thinking, development discipline.</p>

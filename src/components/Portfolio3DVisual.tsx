@@ -16,10 +16,10 @@ const projectPhotos: Record<ProjectVariant, { src: string; alt: string }> = {
 const visualPhotos: Record<Exclude<VisualKind, "project">, { src: string; alt: string }> = {
   hero: { src: PORTFOLIO_RESOURCES.heroWorkspaceImage, alt: "Modern professional creative workspace" },
   about: { src: PORTFOLIO_RESOURCES.aboutImage, alt: "Portrait of Taiwo Emmanuel, web designer and developer" },
-  design: { src: PORTFOLIO_RESOURCES.serviceImages.design, alt: "Professional designer working on a website design project" },
-  development: { src: PORTFOLIO_RESOURCES.serviceImages.development, alt: "Developer working on code at a professional workstation" },
-  business: { src: PORTFOLIO_RESOURCES.serviceImages.business, alt: "Modern professional business office environment" },
-  ux: { src: PORTFOLIO_RESOURCES.serviceImages.ux, alt: "Professional UX and interface design workspace" },
+  design: { src: PORTFOLIO_RESOURCES.serviceImages["design"] ?? "", alt: "Professional designer working on a website design project" },
+  development: { src: PORTFOLIO_RESOURCES.serviceImages["development"] ?? "", alt: "Developer working on code at a professional workstation" },
+  business: { src: PORTFOLIO_RESOURCES.serviceImages["business"] ?? "", alt: "Modern professional business office environment" },
+  ux: { src: PORTFOLIO_RESOURCES.serviceImages["ux"] ?? "", alt: "Professional UX and interface design workspace" },
   process: { src: PORTFOLIO_RESOURCES.processImage, alt: "Professional creative team collaborating around a table" },
 };
 
