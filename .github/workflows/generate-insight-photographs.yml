@@ -54,9 +54,9 @@ jobs:
             test "${bytes}" -gt 0
             jq -r '.data' "/tmp/${asset}.json" | base64 --decode > "/tmp/${asset}.generated"
             test -s "/tmp/${asset}.generated"
-            magick identify "/tmp/${asset}.generated"
-            magick "/tmp/${asset}.generated" -strip -quality 88 "src/assets/insights/${asset}.webp"
-            magick identify "src/assets/insights/${asset}.webp"
+            identify "/tmp/${asset}.generated"
+            convert "/tmp/${asset}.generated" -strip -quality 88 "src/assets/insights/${asset}.webp"
+            identify "src/assets/insights/${asset}.webp"
             test -s "src/assets/insights/${asset}.webp"
           done
 
@@ -79,7 +79,7 @@ jobs:
           for asset in "${assets[@]}"; do
             test -f "src/assets/insights/${asset}.webp"
             test -s "src/assets/insights/${asset}.webp"
-            magick identify "src/assets/insights/${asset}.webp"
+            identify "src/assets/insights/${asset}.webp"
           done
           grep -q 'business-website.webp' src/routes/insights.tsx
           grep -q 'process.webp' src/routes/insights.tsx
