@@ -1,15 +1,15 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import { ArrowRight, Clock3, Search } from "lucide-react";
-import { useMemo, useState } from "react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { Reveal } from "@/components/Reveal";
+import { useMemo, useState } from "react";
 
 export const CATEGORIES = ["All", "Web Design", "Development", "UI/UX", "Business", "SEO", "Performance"] as const;
 export type Category = (typeof CATEGORIES)[number];
 
 const INSIGHTS_VISUAL = "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85";
 const INSIGHT_IMAGES = [
-  "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=90",
   "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=85",
   "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85",
   "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=85",
@@ -20,7 +20,7 @@ const INSIGHT_IMAGES = [
 ] as const;
 
 export const ARTICLES = [
-  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers.", image: INSIGHT_IMAGES[0], imageAlt: "Realistic modern workspace with a laptop and creative work setup" },
+  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers.", image: INSIGHT_IMAGES[0], imageAlt: "Realistic business website analytics displayed on a laptop in a modern workspace" },
   { slug: "5-website-design-mistakes-that-cost-businesses-customers", title: "5 Website Design Mistakes That Cost Businesses Customers", category: "Web Design", date: "September 9, 2026", reading: "5 min", description: "Five common design problems that create hesitation, confusion or unnecessary friction for visitors.", image: INSIGHT_IMAGES[1], imageAlt: "Realistic professional business workspace and team environment" },
   { slug: "why-mobile-first-design-matters", title: "Why Mobile-First Design Matters for Modern Businesses", category: "UI/UX", date: "September 5, 2026", reading: "5 min", description: "How starting with smaller screens can produce clearer layouts and better decisions across every device.", image: INSIGHT_IMAGES[2], imageAlt: "Realistic creative technology workspace for digital product design" },
   { slug: "website-speed-user-experience", title: "Website Speed: The Hidden Part of a Good User Experience", category: "Performance", date: "August 29, 2026", reading: "6 min", description: "A practical look at the performance details users notice even when they never talk about them.", image: INSIGHT_IMAGES[3], imageAlt: "Realistic professional technology and collaboration workspace" },
