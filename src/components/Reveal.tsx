@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Children, isValidElement, useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { DeveloperPortrait } from "@/components/DeveloperPortrait";
 
 export function Reveal({
   children,
@@ -32,6 +33,25 @@ export function Reveal({
     return () => observer.disconnect();
   }, []);
 
+  const childList = Children.toArray(children);
+  const isAboutHeading =
+    childList.length > 0 &&
+    isValidElement(childList[0]) &&
+    childList[0].type === "h2" &&
+    childList[0].props.children === "About me";
+
+  const renderedChildren = isAboutHeading ? (
+    <>
+      {childList[0]}
+      <div className="mt-8 w-full max-w-4xl">
+        <DeveloperPortrait />
+      </div>
+      {childList.slice(1)}
+    </>
+  ) : (
+    children
+  );
+
   return (
     <Tag
       ref={ref as never}
@@ -39,7 +59,7 @@ export function Reveal({
       style={{ transitionDelay: `${delay}ms` }}
       className={cn("reveal", className)}
     >
-      {children}
+      {renderedChildren}
     </Tag>
   );
 }
