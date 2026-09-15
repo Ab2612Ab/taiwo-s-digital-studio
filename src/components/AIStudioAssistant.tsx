@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Bot, ChevronDown, Mic, MicOff, Send, Volume2, VolumeX, X } from "lucide-react";
 
 type Message = { id: number; from: "bot" | "user"; text: string };
-
 const SESSION_KEY = "taiwo-ai-studio-conversation";
 const KNOWLEDGE = {
   services: "Taiwo Emmanuel provides Website Design, Website Development, Business Websites and UI/UX Optimisation. The portfolio also covers e-commerce websites, landing pages and website redesign work.",
@@ -11,22 +10,11 @@ const KNOWLEDGE = {
   pricing: "Published starting prices are Website Design $850+, Website Development $1,000+, Business Websites $1,200+ and UI/UX Optimisation $850+. Final pricing depends on the project requirements.",
   contact: "You can use the Contact page, the Contact me WhatsApp button, or book a project consultation through /booking.",
 };
-
 function welcomeMessage(): Message { return { id: Date.now(), from: "bot", text: "Hi! 👋 I'm Taiwo's Studio Assistant. Welcome! What are you looking to build, improve, or solve with your website?" }; }
 function loadMessages(): Message[] { try { const saved = sessionStorage.getItem(SESSION_KEY); if (saved) return JSON.parse(saved); } catch {} return [welcomeMessage()]; }
-
 function conversationReply(input: string, history: Message[]) {
-  const text = input.toLowerCase().trim();
-  const recent = history.filter(m => m.from === "user").slice(-5).map(m => m.text.toLowerCase()).join(" ");
-  const context = `${recent} ${text}`;
-  const hasWebsiteProblem = /slow|outdated|bad|broken|nobody|no one|not getting|conversion|old website|redesign|problem|improve|fix/.test(context);
-  const isNewSite = /need a website|new website|build a website|business website|website for my/.test(context);
-  const isEcommerce = /e.?commerce|online store|shop|sell online|products|checkout/.test(context);
-  const isBooking = /book|appointment|schedule|calendar/.test(context);
-  const isPrice = /price|pricing|cost|budget|expensive|how much/.test(context);
-  const isProject = /project|portfolio|case stud|meridian|lumen|northside|crate|atlas|verde/.test(context);
-  const isContact = /contact|hire|email|whatsapp|reach taiwo/.test(context);
-
+  const text = input.toLowerCase().trim(); const recent = history.filter(m => m.from === "user").slice(-5).map(m => m.text.toLowerCase()).join(" "); const context = `${recent} ${text}`;
+  const hasWebsiteProblem = /slow|outdated|bad|broken|nobody|no one|not getting|conversion|old website|redesign|problem|improve|fix/.test(context); const isNewSite = /need a website|new website|build a website|business website|website for my/.test(context); const isEcommerce = /e.?commerce|online store|shop|sell online|products|checkout/.test(context); const isBooking = /book|appointment|schedule|calendar/.test(context); const isPrice = /price|pricing|cost|budget|expensive|how much/.test(context); const isProject = /project|portfolio|case stud|meridian|lumen|northside|crate|atlas|verde/.test(context); const isContact = /contact|hire|email|whatsapp|reach taiwo/.test(context);
   if (/^(hi|hello|hey|good morning|good afternoon|good evening)[!. ,]*$/i.test(text)) return history.length > 2 ? "Good to hear from you again. What would you like to work through next?" : "Hi! 👋 Tell me a little about what you are building or what is not working, and we can work through it together.";
   if (hasWebsiteProblem) return "That sounds like something worth diagnosing rather than jumping straight into a redesign. What type of business is the website for, and what do you most want visitors to do when they arrive?";
   if (isEcommerce) return "Absolutely. For an online store, I’d first clarify the products, how customers should browse them, and how checkout should work. Are you starting from scratch, or do you already have a store that needs improvement?";
@@ -45,101 +33,35 @@ function conversationReply(input: string, history: Message[]) {
 }
 
 export function AIStudioAssistant() {
-  const [open, setOpen] = useState(false);
-  const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<Message[]>(loadMessages);
-  const [listening, setListening] = useState(false);
-  const [processing, setProcessing] = useState(false);
-  const [speaking, setSpeaking] = useState(false);
-  const [voiceInputAvailable, setVoiceInputAvailable] = useState(false);
-  const [voiceOutputAvailable, setVoiceOutputAvailable] = useState(false);
-  const recognitionRef = useRef<any>(null);
-  const transcriptRef = useRef("");
-  const voiceSendRef = useRef(false);
-  const inputRef = useRef("");
-  const nextId = useRef(messages.length + 1);
+  const [open, setOpen] = useState(false); const [input, setInput] = useState(""); const [messages, setMessages] = useState<Message[]>(loadMessages); const [listening, setListening] = useState(false); const [processing, setProcessing] = useState(false); const [speaking, setSpeaking] = useState(false); const [voiceInputAvailable, setVoiceInputAvailable] = useState(false); const [voiceOutputAvailable, setVoiceOutputAvailable] = useState(false);
+  const recognitionRef = useRef<any>(null); const transcriptRef = useRef(""); const voiceSendRef = useRef(false); const inputRef = useRef(""); const messagesRef = useRef<Message[]>(messages); const processingRef = useRef(false); const nextId = useRef(messages.length + 1);
   const suggestions = useMemo(() => ["I need a website", "I need help with my existing website", "How much does a website cost?", "Tell me about your services", "Help me plan my project", "I want to book a project"], []);
-
-  useEffect(() => { inputRef.current = input; }, [input]);
-  useEffect(() => { try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages)); } catch {} }, [messages]);
+  useEffect(() => { inputRef.current = input; }, [input]); useEffect(() => { messagesRef.current = messages; try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages)); } catch {} }, [messages]);
 
   function stopSpeaking() { if ("speechSynthesis" in window) window.speechSynthesis.cancel(); setSpeaking(false); }
-  function speak(text: string) {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 1;
-    utterance.onstart = () => setSpeaking(true);
-    utterance.onend = () => setSpeaking(false);
-    utterance.onerror = () => setSpeaking(false);
-    window.speechSynthesis.speak(utterance);
-  }
-
+  function speak(text: string) { if (!("speechSynthesis" in window)) return; window.speechSynthesis.cancel(); const utterance = new SpeechSynthesisUtterance(text); utterance.rate = 1; utterance.onstart = () => setSpeaking(true); utterance.onend = () => setSpeaking(false); utterance.onerror = () => setSpeaking(false); window.speechSynthesis.speak(utterance); }
   function send(text = input, spokenInput = false) {
-    const clean = text.trim();
-    if (!clean || processing) return;
-    const user: Message = { id: nextId.current++, from: "user", text: clean };
-    const reply: Message = { id: nextId.current++, from: "bot", text: conversationReply(clean, [...messages, user]) };
-    setMessages(prev => [...prev, user, reply]);
-    setInput(""); inputRef.current = ""; setProcessing(false);
-    if (spokenInput) speak(reply.text);
+    const clean = text.trim(); if (!clean || processingRef.current) return; const user: Message = { id: nextId.current++, from: "user", text: clean }; const reply: Message = { id: nextId.current++, from: "bot", text: conversationReply(clean, [...messagesRef.current, user]) }; const next = [...messagesRef.current, user, reply]; messagesRef.current = next; setMessages(next); setInput(""); inputRef.current = ""; processingRef.current = false; setProcessing(false); if (spokenInput) speak(reply.text);
   }
+  const sendRef = useRef(send); useEffect(() => { sendRef.current = send; });
 
   useEffect(() => {
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const canSynthesize = "speechSynthesis" in window && typeof window.SpeechSynthesisUtterance !== "undefined";
-    setVoiceInputAvailable(!!SpeechRecognition);
-    setVoiceOutputAvailable(canSynthesize);
-    if (!SpeechRecognition) return;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = true;
-    recognition.lang = "en-US";
-    recognition.onstart = () => { transcriptRef.current = ""; setListening(true); setProcessing(false); };
-    recognition.onresult = (event: any) => {
-      let transcript = "";
-      for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
-      transcriptRef.current = transcript;
-      setInput(transcript);
-      inputRef.current = transcript;
-    };
-    recognition.onerror = (event: any) => {
-      setListening(false); setProcessing(false); voiceSendRef.current = false;
-      if (event?.error === "not-allowed" || event?.error === "service-not-allowed") setInput("Microphone permission was blocked. You can type your message instead.");
-    };
-    recognition.onend = () => {
-      setListening(false);
-      if (voiceSendRef.current) {
-        voiceSendRef.current = false;
-        const transcript = transcriptRef.current.trim() || inputRef.current.trim();
-        if (transcript) { setProcessing(true); window.setTimeout(() => send(transcript, true), 0); }
-        else setProcessing(false);
-      } else setProcessing(false);
-    };
-    recognitionRef.current = recognition;
-    return () => { try { recognition.stop(); } catch {} };
-  }, [messages, processing]);
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition; const canSynthesize = "speechSynthesis" in window && typeof window.SpeechSynthesisUtterance !== "undefined";
+    setVoiceInputAvailable(!!SpeechRecognition); setVoiceOutputAvailable(canSynthesize); if (!SpeechRecognition) return;
+    const recognition = new SpeechRecognition(); recognition.continuous = false; recognition.interimResults = true; recognition.lang = "en-US";
+    recognition.onstart = () => { transcriptRef.current = ""; setListening(true); setProcessing(false); processingRef.current = false; };
+    recognition.onresult = (event: any) => { let transcript = ""; for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript; transcriptRef.current = transcript; setInput(transcript); inputRef.current = transcript; };
+    recognition.onerror = (event: any) => { setListening(false); setProcessing(false); processingRef.current = false; voiceSendRef.current = false; if (event?.error === "not-allowed" || event?.error === "service-not-allowed") setInput("Microphone permission was blocked. You can type your message instead."); };
+    recognition.onend = () => { setListening(false); if (voiceSendRef.current) { voiceSendRef.current = false; const transcript = transcriptRef.current.trim() || inputRef.current.trim(); if (transcript) { setProcessing(true); processingRef.current = true; window.setTimeout(() => sendRef.current(transcript, true), 0); } else { setProcessing(false); processingRef.current = false; } } else { setProcessing(false); processingRef.current = false; } };
+    recognitionRef.current = recognition; return () => { try { recognition.stop(); } catch {} };
+  }, []);
 
   function toggleListening() {
-    if (!voiceInputAvailable || processing) return;
-    if (listening) {
-      voiceSendRef.current = true;
-      setProcessing(true);
-      try { recognitionRef.current?.stop(); } catch { voiceSendRef.current = false; setListening(false); setProcessing(false); }
-      return;
-    }
-    stopSpeaking();
-    transcriptRef.current = "";
-    setInput(""); inputRef.current = "";
-    try { recognitionRef.current?.start(); } catch { setListening(false); setProcessing(false); }
+    if (!voiceInputAvailable || processingRef.current) return;
+    if (listening) { voiceSendRef.current = true; setProcessing(true); processingRef.current = true; try { recognitionRef.current?.stop(); } catch { voiceSendRef.current = false; setListening(false); setProcessing(false); processingRef.current = false; } return; }
+    stopSpeaking(); transcriptRef.current = ""; setInput(""); inputRef.current = ""; try { recognitionRef.current?.start(); } catch { setListening(false); setProcessing(false); processingRef.current = false; }
   }
-
-  function resetConversation() {
-    stopSpeaking();
-    try { sessionStorage.removeItem(SESSION_KEY); } catch {}
-    setMessages([welcomeMessage()]);
-    setInput(""); setProcessing(false); setListening(false);
-  }
+  function resetConversation() { stopSpeaking(); try { sessionStorage.removeItem(SESSION_KEY); } catch {} const welcome = welcomeMessage(); messagesRef.current = [welcome]; setMessages([welcome]); setInput(""); setProcessing(false); processingRef.current = false; setListening(false); }
 
   return <div className="fixed bottom-24 right-5 z-[60]">
     {open && <div className="mb-3 flex h-[min(620px,calc(100vh-120px))] w-[min(400px,calc(100vw-32px))] flex-col overflow-hidden rounded-3xl border border-border bg-background/95 shadow-2xl backdrop-blur-xl">
