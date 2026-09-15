@@ -52,7 +52,7 @@ export function AIStudioAssistant() {
     recognition.onstart = () => { transcriptRef.current = ""; setListening(true); setProcessing(false); processingRef.current = false; };
     recognition.onresult = (event: any) => { let transcript = ""; for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript; transcriptRef.current = transcript; setInput(transcript); inputRef.current = transcript; };
     recognition.onerror = (event: any) => { setListening(false); setProcessing(false); processingRef.current = false; voiceSendRef.current = false; if (event?.error === "not-allowed" || event?.error === "service-not-allowed") setInput("Microphone permission was blocked. You can type your message instead."); };
-    recognition.onend = () => { setListening(false); if (voiceSendRef.current) { voiceSendRef.current = false; const transcript = transcriptRef.current.trim() || inputRef.current.trim(); if (transcript) { setProcessing(true); processingRef.current = true; window.setTimeout(() => sendRef.current(transcript, true), 0); } else { setProcessing(false); processingRef.current = false; } } else { setProcessing(false); processingRef.current = false; } };
+    recognition.onend = () => { setListening(false); if (voiceSendRef.current) { voiceSendRef.current = false; const transcript = transcriptRef.current.trim() || inputRef.current.trim(); if (transcript) { setProcessing(true); processingRef.current = false; window.setTimeout(() => sendRef.current(transcript, true), 0); } else { setProcessing(false); processingRef.current = false; } } else { setProcessing(false); processingRef.current = false; } };
     recognitionRef.current = recognition; return () => { try { recognition.stop(); } catch {} };
   }, []);
 
