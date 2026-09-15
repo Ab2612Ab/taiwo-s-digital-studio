@@ -8,6 +8,13 @@ on:
       - 'src/routes/insights.tsx'
       - 'scripts/generate-insight-assets.cjs'
       - 'src/components/AIStudioAssistant.tsx'
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/generate-insight-photographs.yml'
+      - 'src/routes/insights.tsx'
+      - 'scripts/generate-insight-assets.cjs'
+      - 'src/components/AIStudioAssistant.tsx'
   workflow_dispatch:
 
 permissions:
@@ -91,10 +98,13 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          # Rebase before applying generated and auto-fixed changes.
+          # The pull_request checkout is a synthetic merge commit. Preserve the
+          # generated working tree, switch to the actual PR head, merge current
+          # main if it moved, then re-apply and publish the verified changes.
           git stash push --include-untracked --message 'verified Insight asset changes'
-          git fetch origin main
-          git rebase origin/main
+          git fetch origin main automation/insight-assets-final
+          git checkout -B verified-insight-publish FETCH_HEAD
+          git merge --no-edit origin/main
           git stash pop
 
           git add src scripts .github/workflows/generate-insight-photographs.yml
