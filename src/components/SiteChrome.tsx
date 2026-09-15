@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
-const NAV = [["Home", "/"], ["About", "/about"], ["Services", "/services"], ["Projects", "/projects"], ["Insights", "/insights"], ["Booking", "/booking"], ["Process", "/process"], ["Contact", "/contact"]] as const;
+const NAV = [["Home", "/"], ["About", "/about"], ["Services", "/services"], ["Projects", "/projects/"], ["Insights", "/insights"], ["Booking", "/booking"], ["Process", "/process"], ["Contact", "/contact"]] as const;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
