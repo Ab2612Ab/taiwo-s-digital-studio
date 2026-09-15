@@ -13,23 +13,22 @@ const projectPhotos: Record<ProjectVariant, { src: string; alt: string }> = {
   "verde-interiors": { src: PORTFOLIO_RESOURCES.projectImages["verde-interiors"], alt: "Premium contemporary interior architecture and interior design" },
 };
 
-const projectOrder: ProjectVariant[] = [
-  "meridian-consulting",
-  "lumen-studio",
-  "northside-fitness",
-  "crate-and-co",
-  "atlas-dashboard",
-  "verde-interiors",
-];
+const projectNames: Record<string, ProjectVariant> = {
+  "Meridian Consulting": "meridian-consulting",
+  "Lumen Studio": "lumen-studio",
+  "Northside Fitness": "northside-fitness",
+  "Crate & Co.": "crate-and-co",
+  "Atlas Dashboard": "atlas-dashboard",
+  "Verde Interiors": "verde-interiors",
+};
 
-const visualPhotos: Record<VisualKind, { src: string; alt: string }> = {
+const visualPhotos: Record<Exclude<VisualKind, "project">, { src: string; alt: string }> = {
   hero: { src: PORTFOLIO_RESOURCES.heroWorkspaceImage, alt: "Modern professional creative workspace" },
   about: { src: PORTFOLIO_RESOURCES.aboutImage, alt: "Portrait of Taiwo Emmanuel, web designer and developer" },
   design: { src: PORTFOLIO_RESOURCES.serviceImages.design, alt: "Professional designer working on a website design project" },
   development: { src: PORTFOLIO_RESOURCES.serviceImages.development, alt: "Developer working on code at a professional workstation" },
   business: { src: PORTFOLIO_RESOURCES.serviceImages.business, alt: "Modern professional business office environment" },
   ux: { src: PORTFOLIO_RESOURCES.serviceImages.ux, alt: "Professional UX and interface design workspace" },
-  project: { src: PORTFOLIO_RESOURCES.projectImages["atlas-dashboard"], alt: "Business analytics and data visualization environment" },
   process: { src: PORTFOLIO_RESOURCES.processImage, alt: "Professional creative team collaborating around a table" },
 };
 
@@ -40,27 +39,34 @@ export function Portfolio3DVisual({ kind, className = "", project }: { kind: Vis
   useEffect(() => {
     if (kind !== "project" || project) return;
     const article = rootRef.current?.closest("article");
-    const grid = article?.parentElement;
-    const index = article && grid ? Array.from(grid.children).indexOf(article) : -1;
-    setDetectedProject(projectOrder[index] ?? "atlas-dashboard");
+    const projectName = article?.querySelector("h3")?.textContent?.trim() ?? "";
+    const detected = projectNames[projectName];
+    if (detected) setDetectedProject(detected);
   }, [kind, project]);
 
-  const photo = kind === "project" && detectedProject ? projectPhotos[detectedProject] : visualPhotos[kind];
+  const photo = kind === "project"
+    ? detectedProject ? projectPhotos[detectedProject] : undefined
+    : visualPhotos[kind];
 
   return (
     <div
       ref={rootRef}
       className={`relative overflow-hidden rounded-[2rem] border border-border bg-card ${className}`}
+      data-project-visual={detectedProject ?? "unassigned"}
     >
-      <img
-        src={photo.src}
-        alt={photo.alt}
-        width={1400}
-        height={900}
-        loading={kind === "hero" ? "eager" : "lazy"}
-        decoding="async"
-        className="block h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-      />
+      {photo ? (
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          width={1400}
+          height={900}
+          loading={kind === "hero" ? "eager" : "lazy"}
+          decoding="async"
+          className="block h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+        />
+      ) : kind === "project" ? (
+        <div aria-hidden="true" className="h-full min-h-40 w-full bg-card" />
+      ) : null}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
     </div>
   );
