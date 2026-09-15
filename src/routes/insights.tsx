@@ -8,16 +8,26 @@ export const CATEGORIES = ["All", "Web Design", "Development", "UI/UX", "Busines
 export type Category = (typeof CATEGORIES)[number];
 
 const INSIGHTS_VISUAL = "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85";
+const INSIGHT_IMAGES = [
+  "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1553877522-43269d4ea692?auto=format&fit=crop&w=1200&q=85",
+  "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85",
+] as const;
 
 export const ARTICLES = [
-  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers." },
-  { slug: "5-website-design-mistakes-that-cost-businesses-customers", title: "5 Website Design Mistakes That Cost Businesses Customers", category: "Web Design", date: "September 9, 2026", reading: "5 min", description: "Five common design problems that create hesitation, confusion or unnecessary friction for visitors." },
-  { slug: "why-mobile-first-design-matters", title: "Why Mobile-First Design Matters for Modern Businesses", category: "UI/UX", date: "September 5, 2026", reading: "5 min", description: "How starting with smaller screens can produce clearer layouts and better decisions across every device." },
-  { slug: "website-speed-user-experience", title: "Website Speed: The Hidden Part of a Good User Experience", category: "Performance", date: "August 29, 2026", reading: "6 min", description: "A practical look at the performance details users notice even when they never talk about them." },
-  { slug: "good-ui-ux-turns-visitors-into-customers", title: "How Good UI/UX Turns Visitors Into Customers", category: "UI/UX", date: "August 24, 2026", reading: "7 min", description: "Clarity, hierarchy and reduced friction can make a website easier to use and easier to act on." },
-  { slug: "before-building-a-business-website", title: "What Every Business Should Know Before Building a Website", category: "Business", date: "August 17, 2026", reading: "6 min", description: "The questions worth answering about goals, audience, content, ownership and maintenance before development begins." },
-  { slug: "designing-websites-that-build-trust", title: "Designing Websites That Build Trust", category: "Web Design", date: "August 10, 2026", reading: "5 min", description: "Trust is built through details: consistency, useful information, honest messaging and a predictable experience." },
-  { slug: "from-idea-to-launch-website-development-process", title: "From Idea to Launch: My Website Development Process", category: "Development", date: "August 3, 2026", reading: "7 min", description: "A transparent view of how a website project moves from discovery and structure through development, testing and launch." },
+  { slug: "what-makes-a-business-website-actually-work", title: "What Makes a Business Website Actually Work?", category: "Business", date: "September 12, 2026", reading: "6 min", description: "Discover how a focused website can earn trust, guide decisions and turn more of the right visitors into customers.", image: INSIGHT_IMAGES[0], imageAlt: "Realistic modern workspace with a laptop and creative work setup" },
+  { slug: "5-website-design-mistakes-that-cost-businesses-customers", title: "5 Website Design Mistakes That Cost Businesses Customers", category: "Web Design", date: "September 9, 2026", reading: "5 min", description: "Five common design problems that create hesitation, confusion or unnecessary friction for visitors.", image: INSIGHT_IMAGES[1], imageAlt: "Realistic professional business workspace and team environment" },
+  { slug: "why-mobile-first-design-matters", title: "Why Mobile-First Design Matters for Modern Businesses", category: "UI/UX", date: "September 5, 2026", reading: "5 min", description: "How starting with smaller screens can produce clearer layouts and better decisions across every device.", image: INSIGHT_IMAGES[2], imageAlt: "Realistic creative technology workspace for digital product design" },
+  { slug: "website-speed-user-experience", title: "Website Speed: The Hidden Part of a Good User Experience", category: "Performance", date: "August 29, 2026", reading: "6 min", description: "A practical look at the performance details users notice even when they never talk about them.", image: INSIGHT_IMAGES[3], imageAlt: "Realistic professional technology and collaboration workspace" },
+  { slug: "good-ui-ux-turns-visitors-into-customers", title: "How Good UI/UX Turns Visitors Into Customers", category: "UI/UX", date: "August 24, 2026", reading: "7 min", description: "Clarity, hierarchy and reduced friction can make a website easier to use and easier to act on.", image: INSIGHT_IMAGES[4], imageAlt: "Realistic modern business team working on digital experiences" },
+  { slug: "before-building-a-business-website", title: "What Every Business Should Know Before Building a Website", category: "Business", date: "August 17, 2026", reading: "6 min", description: "The questions worth answering about goals, audience, content, ownership and maintenance before development begins.", image: INSIGHT_IMAGES[5], imageAlt: "Realistic modern office workspace for planning a business project" },
+  { slug: "designing-websites-that-build-trust", title: "Designing Websites That Build Trust", category: "Web Design", date: "August 10, 2026", reading: "5 min", description: "Trust is built through details: consistency, useful information, honest messaging and a predictable experience.", image: INSIGHT_IMAGES[6], imageAlt: "Realistic professional workspace representing a polished digital business" },
+  { slug: "from-idea-to-launch-website-development-process", title: "From Idea to Launch: My Website Development Process", category: "Development", date: "August 3, 2026", reading: "7 min", description: "A transparent view of how a website project moves from discovery and structure through development, testing and launch.", image: INSIGHT_IMAGES[7], imageAlt: "Realistic software development team working together in a modern office" },
 ] as const;
 
 export const Route = createFileRoute("/insights")({ head: () => ({ meta: [
@@ -31,12 +41,17 @@ export const Route = createFileRoute("/insights")({ head: () => ({ meta: [
 ] }), component: InsightsPage });
 
 function ArticleCard({ article }: { article: (typeof ARTICLES)[number] }) {
-  return <article className="group flex h-full flex-col rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]">
-    <span className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{article.category}</span>
-    <h2 className="mt-3 text-xl font-semibold leading-tight"><Link to="/insights/$slug" params={{ slug: article.slug }} className="hover:text-primary">{article.title}</Link></h2>
-    <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{article.description}</p>
-    <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground"><span>{article.date}</span><span className="inline-flex items-center gap-1"><Clock3 className="size-3.5" aria-hidden="true" />{article.reading}</span></div>
-    <Link to="/insights/$slug" params={{ slug: article.slug }} className="mx-auto mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Read article <ArrowRight className="size-4" aria-hidden="true" /></Link>
+  return <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card/60 transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-elegant)]">
+    <Link to="/insights/$slug" params={{ slug: article.slug }} aria-label={`Read ${article.title}`} className="block overflow-hidden border-b border-border bg-muted">
+      <img src={article.image} alt={article.imageAlt} loading="lazy" width={1200} height={675} className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+    </Link>
+    <div className="flex flex-1 flex-col p-6 text-center">
+      <span className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{article.category}</span>
+      <h2 className="mt-3 text-xl font-semibold leading-tight"><Link to="/insights/$slug" params={{ slug: article.slug }} className="hover:text-primary">{article.title}</Link></h2>
+      <p className="mt-3 flex-1 text-sm leading-6 text-muted-foreground">{article.description}</p>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground"><span>{article.date}</span><span className="inline-flex items-center gap-1"><Clock3 className="size-3.5" aria-hidden="true" />{article.reading}</span></div>
+      <Link to="/insights/$slug" params={{ slug: article.slug }} className="mx-auto mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">Read article <ArrowRight className="size-4" aria-hidden="true" /></Link>
+    </div>
   </article>;
 }
 
