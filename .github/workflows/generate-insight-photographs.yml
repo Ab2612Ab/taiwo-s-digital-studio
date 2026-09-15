@@ -7,6 +7,7 @@ on:
       - '.github/workflows/generate-insight-photographs.yml'
       - 'src/routes/insights.tsx'
       - 'scripts/generate-insight-assets.cjs'
+      - 'src/components/AIStudioAssistant.tsx'
   workflow_dispatch:
 
 permissions:
@@ -61,11 +62,14 @@ jobs:
           if grep -Eq 'assets/insights/[^"[:space:]]+\.svg' src/routes/insights.tsx; then exit 1; fi
           if grep -Eiq 'data:image|base64|https?://' src/routes/insights.tsx; then exit 1; fi
 
-      - name: Format source without changing runtime content
-        run: npx prettier --write src
+      - name: Format source
+        run: npx prettier --write src scripts
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
+
+      - name: Auto-fix safe ESLint issues
+        run: npx eslint . --fix
 
       - name: Build
         run: npm run build
