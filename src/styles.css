@@ -89,6 +89,16 @@ section ul.flex, section ol, section ul.space-y-4 { justify-items: center; margi
 section li.flex { justify-content: center; }
 section form, section form > div, section .card, section [role="group"] { margin-left: auto; margin-right: auto; }
 
+@media (min-width: 768px) {
+  /* The homepage uses a grid wrapper; make it visually match the shared header. */
+  header > div.grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 767px) {
   header nav { text-align: center; }
   header nav a { justify-content: center; text-align: center; }
