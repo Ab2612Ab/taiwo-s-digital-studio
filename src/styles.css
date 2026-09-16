@@ -64,133 +64,35 @@
 
 @layer base {
   * { border-color: var(--color-border); }
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-    text-align: center;
-  }
-
+  body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; text-align: center; }
   main, section, article, aside, footer { text-align: center; }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
-    text-align: center !important;
-    color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  h2, h3, h4, h5, h6,
-  [class*="subtitle"], [class*="subheading"] {
-    text-align: center !important;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  p, li, label, blockquote, figcaption {
-    text-align: center !important;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  ul, ol {
-    list-style-position: inside;
-    padding-left: 0;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-display); letter-spacing: -0.02em; text-align: center !important; color: #ffffff; margin-left: auto; margin-right: auto; }
+  h2, h3, h4, h5, h6, [class*="subtitle"], [class*="subheading"] { text-align: center !important; margin-left: auto; margin-right: auto; }
+  p, li, label, blockquote, figcaption { text-align: center !important; margin-left: auto; margin-right: auto; }
+  ul, ol { list-style-position: inside; padding-left: 0; margin-left: auto; margin-right: auto; }
   html { scroll-behavior: smooth; }
 }
 
-@utility text-gradient {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+@utility text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@utility reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); &[data-visible="true"] { opacity: 1; transform: none; } }
 
-@utility reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  &[data-visible="true"] { opacity: 1; transform: none; }
-}
-
-/* Brand: always read in the correct order: web + dev. */
-header a[href="/"] {
-  display: inline-flex !important;
-  align-items: center;
-  justify-self: start;
-  width: max-content;
-  white-space: nowrap;
-  text-align: left !important;
-  text-decoration: none;
-}
+header a[href="/"] { display: inline-flex !important; align-items: center; justify-self: start; width: max-content; white-space: nowrap; text-align: left !important; text-decoration: none; }
 header a[href="/"] span:first-child { color: #ffffff !important; }
 header a[href="/"] span:last-child { color: var(--primary) !important; }
 
-/* Keep all content directly beneath its related heading/subheading and centered. */
-section > div > .reveal,
-section > div > .reveal + div,
-section > div > .reveal ~ div {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
-section > div,
-section > div > div,
-section .reveal,
-section .space-y-4,
-section .space-y-6,
-section .space-y-8,
-section .space-y-10,
-section .space-y-12 {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-section .text-center,
-section .mx-auto {
-  text-align: center !important;
-}
-
-section .text-left,
-section .text-start {
-  text-align: center !important;
-}
-
-section .flex.flex-wrap,
-section .flex.items-center,
-section .inline-flex {
-  justify-content: center;
-}
-
-section ul.flex,
-section ol,
-section ul.space-y-4 {
-  justify-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-section li.flex {
-  justify-content: center;
-}
-
-section form,
-section form > div,
-section .card,
-section [role="group"] {
-  margin-left: auto;
-  margin-right: auto;
-}
+section > div > .reveal, section > div > .reveal + div, section > div > .reveal ~ div { margin-left: auto; margin-right: auto; text-align: center; }
+section > div, section > div > div, section .reveal, section .space-y-4, section .space-y-6, section .space-y-8, section .space-y-10, section .space-y-12 { margin-left: auto; margin-right: auto; }
+section .text-center, section .mx-auto { text-align: center !important; }
+section .text-left, section .text-start { text-align: center !important; }
+section .flex.flex-wrap, section .flex.items-center, section .inline-flex { justify-content: center; }
+section ul.flex, section ol, section ul.space-y-4 { justify-items: center; margin-left: auto; margin-right: auto; }
+section li.flex { justify-content: center; }
+section form, section form > div, section .card, section [role="group"] { margin-left: auto; margin-right: auto; }
 
 @media (max-width: 767px) {
   header nav { text-align: center; }
   header nav a { justify-content: center; text-align: center; }
+  header nav.flex.flex-col { width: 100%; align-items: stretch; gap: 0; padding-top: 0.35rem; padding-bottom: 0.65rem; }
+  header nav.flex.flex-col a { display: flex; width: 100%; min-height: 2.75rem; align-items: center; justify-content: center; border-radius: 0; border-bottom: 1px solid var(--border); padding: 0.7rem 0.5rem; background: transparent; }
+  header nav.flex.flex-col a:last-child { border-bottom: 0; }
 }
