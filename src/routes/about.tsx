@@ -20,8 +20,7 @@ function About() {
       <main className="px-5 pb-20 pt-32 text-center md:pt-40">
         <div className="mx-auto max-w-6xl">
           <Reveal>
-            <p className="text-sm font-medium uppercase tracking-wide text-primary">Taiwo Emmanuel</p>
-            <h1 className="mt-3 text-4xl font-extrabold sm:text-5xl">About me</h1>
+            <h1 className="text-4xl font-extrabold sm:text-5xl">About me</h1>
             <div className="mx-auto mt-8 w-full max-w-md">
               <DeveloperPortrait />
             </div>
