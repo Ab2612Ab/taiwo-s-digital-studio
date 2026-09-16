@@ -2,6 +2,7 @@ import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-r
 import { ArrowRight, Clock3, Search } from "lucide-react";
 import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 import { Reveal } from "@/components/Reveal";
+import { PORTFOLIO_RESOURCES } from "@/lib/portfolio-resources";
 import { useMemo, useState } from "react";
 
 export const CATEGORIES = ["All", "Web Design", "Development", "UI/UX", "Business", "SEO", "Performance"] as const;
@@ -15,7 +16,7 @@ const INSIGHT_IMAGES = [
   "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=85",
   "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=85",
   "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=85",
-  "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  PORTFOLIO_RESOURCES.projectImages["lumen-studio"],
   "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=85",
 ] as const;
 
@@ -26,7 +27,7 @@ export const ARTICLES = [
   { slug: "website-speed-user-experience", title: "Website Speed: The Hidden Part of a Good User Experience", category: "Performance", date: "August 29, 2026", reading: "6 min", description: "A practical look at the performance details users notice even when they never talk about them.", image: INSIGHT_IMAGES[3], imageAlt: "Realistic professional technology and collaboration workspace" },
   { slug: "good-ui-ux-turns-visitors-into-customers", title: "How Good UI/UX Turns Visitors Into Customers", category: "UI/UX", date: "August 24, 2026", reading: "7 min", description: "Clarity, hierarchy and reduced friction can make a website easier to use and easier to act on.", image: INSIGHT_IMAGES[4], imageAlt: "Realistic modern business team working on digital experiences" },
   { slug: "before-building-a-business-website", title: "What Every Business Should Know Before Building a Website", category: "Business", date: "August 17, 2026", reading: "6 min", description: "The questions worth answering about goals, audience, content, ownership and maintenance before development begins.", image: INSIGHT_IMAGES[5], imageAlt: "Realistic modern office workspace for planning a business project" },
-  { slug: "designing-websites-that-build-trust", title: "Designing Websites That Build Trust", category: "Web Design", date: "August 10, 2026", reading: "5 min", description: "Trust is built through details: consistency, useful information, honest messaging and a predictable experience.", image: INSIGHT_IMAGES[6], imageAlt: "Realistic professional business team collaborating in a bright modern workspace" },
+  { slug: "designing-websites-that-build-trust", title: "Designing Websites That Build Trust", category: "Web Design", date: "August 10, 2026", reading: "5 min", description: "Trust is built through details: consistency, useful information, honest messaging and a predictable experience.", image: INSIGHT_IMAGES[6], imageAlt: "Lumen Studio web design project visual" },
   { slug: "from-idea-to-launch-website-development-process", title: "From Idea to Launch: My Website Development Process", category: "Development", date: "August 3, 2026", reading: "7 min", description: "A transparent view of how a website project moves from discovery and structure through development, testing and launch.", image: INSIGHT_IMAGES[7], imageAlt: "Realistic software development team working together in a modern office" },
 ] as const;
 
