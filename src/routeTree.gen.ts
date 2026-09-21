@@ -21,6 +21,7 @@ import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApiAdminRouteImport } from './routes/api/admin'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiWebdeskAiRouteImport } from './routes/api.webdesk-ai'
 import { Route as InsightsSlugRouteImport } from './routes/insights/$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects/$slug'
@@ -85,6 +86,11 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWebdeskAiRoute = ApiWebdeskAiRouteImport.update({
+  id: '/api/webdesk-ai',
+  path: '/api/webdesk-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InsightsSlugRoute = InsightsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -114,6 +120,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects': typeof ProjectsIndexRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
   '/api/contact': typeof ApiContactRoute
+  '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/projects/': typeof ProjectsIndexRoute
@@ -168,6 +177,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/api/admin'
     | '/api/contact'
+    | '/api/webdesk-ai'
     | '/insights/$slug'
     | '/projects/$slug'
     | '/projects/'
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/api/admin'
     | '/api/contact'
+    | '/api/webdesk-ai'
     | '/insights/$slug'
     | '/projects/$slug'
     | '/projects'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/api/admin'
     | '/api/contact'
+    | '/api/webdesk-ai'
     | '/insights/$slug'
     | '/projects/$slug'
     | '/projects/'
@@ -220,6 +232,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   ApiAdminRoute: typeof ApiAdminRoute
   ApiContactRoute: typeof ApiContactRoute
+  ApiWebdeskAiRoute: typeof ApiWebdeskAiRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
@@ -310,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/webdesk-ai': {
+      id: '/api/webdesk-ai'
+      path: '/api/webdesk-ai'
+      fullPath: '/api/webdesk-ai'
+      preLoaderRoute: typeof ApiWebdeskAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/insights/$slug': {
       id: '/insights/$slug'
       path: '/$slug'
@@ -359,6 +379,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   ApiAdminRoute: ApiAdminRoute,
   ApiContactRoute: ApiContactRoute,
+  ApiWebdeskAiRoute: ApiWebdeskAiRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ProjectsIndexRoute: ProjectsIndexRoute,
 }
