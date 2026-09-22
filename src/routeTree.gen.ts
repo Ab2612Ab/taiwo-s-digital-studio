@@ -20,6 +20,7 @@ import { Route as ProcessRouteImport } from './routes/process'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ApiAdminRouteImport } from './routes/api/admin'
+import { Route as ApiBookingRouteImport } from './routes/api/booking'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 import { Route as ApiWebdeskAiRouteImport } from './routes/api.webdesk-ai'
 import { Route as InsightsSlugRouteImport } from './routes/insights/$slug'
@@ -81,6 +82,11 @@ const ApiAdminRoute = ApiAdminRouteImport.update({
   path: '/api/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiBookingRoute = ApiBookingRouteImport.update({
+  id: '/api/booking',
+  path: '/api/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiContactRoute = ApiContactRouteImport.update({
   id: '/api/contact',
   path: '/api/contact',
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
+  '/api/booking': typeof ApiBookingRoute
   '/api/contact': typeof ApiContactRoute
   '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
+  '/api/booking': typeof ApiBookingRoute
   '/api/contact': typeof ApiContactRoute
   '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
@@ -156,6 +164,7 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/services': typeof ServicesRoute
   '/api/admin': typeof ApiAdminRoute
+  '/api/booking': typeof ApiBookingRoute
   '/api/contact': typeof ApiContactRoute
   '/api/webdesk-ai': typeof ApiWebdeskAiRoute
   '/insights/$slug': typeof InsightsSlugRoute
@@ -176,6 +185,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/api/admin'
+    | '/api/booking'
     | '/api/contact'
     | '/api/webdesk-ai'
     | '/insights/$slug'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/api/admin'
+    | '/api/booking'
     | '/api/contact'
     | '/api/webdesk-ai'
     | '/insights/$slug'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/services'
     | '/api/admin'
+    | '/api/booking'
     | '/api/contact'
     | '/api/webdesk-ai'
     | '/insights/$slug'
@@ -231,6 +243,7 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   ServicesRoute: typeof ServicesRoute
   ApiAdminRoute: typeof ApiAdminRoute
+  ApiBookingRoute: typeof ApiBookingRoute
   ApiContactRoute: typeof ApiContactRoute
   ApiWebdeskAiRoute: typeof ApiWebdeskAiRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
@@ -316,6 +329,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/booking': {
+      id: '/api/booking'
+      path: '/api/booking'
+      fullPath: '/api/booking'
+      preLoaderRoute: typeof ApiBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/contact': {
       id: '/api/contact'
       path: '/api/contact'
@@ -378,6 +398,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   ServicesRoute: ServicesRoute,
   ApiAdminRoute: ApiAdminRoute,
+  ApiBookingRoute: ApiBookingRoute,
   ApiContactRoute: ApiContactRoute,
   ApiWebdeskAiRoute: ApiWebdeskAiRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
