@@ -1,25 +1,13 @@
 import portrait from "@/assets/taiwo-portrait.png";
 import cinematicProfileEnvironment from "@/assets/cinematic-profile-environment.svg";
-import atlasDashboard from "@/assets/projects/atlas-dashboard.webp";
-import crateAndCo from "@/assets/projects/crate-and-co.webp";
-import lumenStudio from "@/assets/projects/lumen-studio.webp";
-import meridianConsulting from "@/assets/projects/meridian-consulting.webp";
-import northsideFitness from "@/assets/projects/northside-fitness.webp";
-import verdeInteriors from "@/assets/projects/verde-interiors.webp";
+import { PROJECT_MAP } from "@/lib/projects-data";
 
 /** Central resource map for approved portfolio visual assets. */
 export const PORTFOLIO_RESOURCES = {
   heroProfile: portrait,
   aboutImage: portrait,
   heroWorkspaceBackground: cinematicProfileEnvironment,
-  projectImages: {
-    "meridian-consulting": meridianConsulting,
-    "lumen-studio": lumenStudio,
-    "northside-fitness": northsideFitness,
-    "crate-and-co": crateAndCo,
-    "atlas-dashboard": atlasDashboard,
-    "verde-interiors": verdeInteriors,
-  },
+  projectImages: Object.fromEntries(Object.entries(PROJECT_MAP).map(([slug, project]) => [slug, project.image])) as Record<string, string>,
   serviceImages: {
     design: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85",
     development: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=85",

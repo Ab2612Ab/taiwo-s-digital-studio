@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Github, Menu, X } from "lucide-react";
+import { Facebook, Github, Linkedin, Menu, X } from "lucide-react";
 
 export const GITHUB_URL = "https://github.com/Ab2612Ab";
+export const LINKEDIN_URL = "https://www.linkedin.com/in/emmanuel-taiwo-46b309271/";
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61585563937761";
 
 const NAV = [["Home", "/"], ["About", "/about"], ["Services", "/services"], ["Projects", "/projects/"], ["Insights", "/insights"], ["Booking", "/booking"], ["Process", "/process"], ["Contact", "/contact"]] as const;
 
@@ -20,10 +22,20 @@ export function SiteFooter() {
           </p>
           <p>Web Designer &amp; Developer</p>
         </div>
-        <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary/50 hover:text-foreground">
-          <Github className="size-4" />
-          github.com/Ab2612Ab
-        </a>
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer" aria-label="GitHub profile" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary/50 hover:text-foreground">
+            <Github className="size-4" />
+            github.com/Ab2612Ab
+          </a>
+          <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" aria-label="LinkedIn profile" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary/50 hover:text-foreground">
+            <Linkedin className="size-4" />
+            LinkedIn
+          </a>
+          <a href={FACEBOOK_URL} target="_blank" rel="noreferrer" aria-label="Facebook page" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary/50 hover:text-foreground">
+            <Facebook className="size-4" />
+            Facebook
+          </a>
+        </div>
         <p>© 2026 webdev. All rights reserved.</p>
       </div>
     </footer>
