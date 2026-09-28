@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Github, Menu, X } from "lucide-react";
+
+export const GITHUB_URL = "https://github.com/Ab2612Ab";
 
 const NAV = [["Home", "/"], ["About", "/about"], ["Services", "/services"], ["Projects", "/projects/"], ["Insights", "/insights"], ["Booking", "/booking"], ["Process", "/process"], ["Contact", "/contact"]] as const;
 
@@ -18,6 +20,10 @@ export function SiteFooter() {
           </p>
           <p>Web Designer &amp; Developer</p>
         </div>
+        <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:border-primary/50 hover:text-foreground">
+          <Github className="size-4" />
+          github.com/Ab2612Ab
+        </a>
         <p>© 2026 webdev. All rights reserved.</p>
       </div>
     </footer>
