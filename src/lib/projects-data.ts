@@ -1,10 +1,10 @@
 /** Shared project data for the portfolio — live deployments first, concept work after. */
 import premiumStoreImage from "@/assets/projects/premium-store.webp";
 import novaframeImage from "@/assets/projects/novaframe.webp";
-import voltixImage from "@/assets/projects/voltix-electronics-store.svg";
+import voltixImage from "@/assets/projects/voltix-electronics-store.webp";
 import dubaiVisionImage from "@/assets/projects/dubai-vision.webp";
 import luneaImage from "@/assets/projects/lunea-skin.webp";
-import webdevSiteImage from "@/assets/projects/webdev-site.svg";
+import webdevSiteImage from "@/assets/projects/webdev-site.webp";
 import meridianConsulting from "@/assets/projects/meridian-consulting.webp";
 import crateAndCo from "@/assets/projects/crate-and-co.webp";
 import lumenStudio from "@/assets/projects/lumen-studio.webp";
