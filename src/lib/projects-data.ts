@@ -20,6 +20,8 @@ export type ProjectEntry = {
   detail: string[];
   /** Set when the project is a live deployment — the card links out to it. */
   liveUrl?: string;
+  /** Optional external case study URL; falls back to the internal page. */
+  caseStudyUrl?: string;
   image: string;
   imageAlt: string;
 };
@@ -67,21 +69,23 @@ export const LIVE_PROJECTS: ProjectEntry[] = [
   },
   {
     slug: "voltix-electronics-store",
-    name: "Voltix Electronics",
+    name: "Voltix Electronics Storefront",
     tag: "E-commerce",
-    body: "An electronics e-commerce storefront built around product discovery and a streamlined purchase path.",
-    detail: ["E-commerce", "Catalogue", "Checkout"],
+    body: "A modern electronics e-commerce experience designed for product discovery, responsive shopping, and a smooth path from browsing to checkout.",
+    detail: ["E-commerce", "Product catalogue", "Shopping experience", "Responsive UI"],
     liveUrl: "https://voltix-electronics-store-emmy-5644.vercel.app/",
+    caseStudyUrl: "https://taiwo-s-digital-studio.vercel.app/projects/voltix-electronics-store",
     image: voltixImage,
     imageAlt: "Voltix electronics storefront preview with product cards and an electric accent",
   },
   {
     slug: "webdev-site",
-    name: "Webdev Brand Site",
-    tag: "Brand Website",
-    body: "The webdev brand website — presenting web design and development services, selected work and a direct enquiry path.",
-    detail: ["Brand site", "Services", "Enquiry"],
+    name: "Webdev Digital Brand Website",
+    tag: "Business Website",
+    body: "A professional digital agency website created to showcase web design and development services, communicate capabilities clearly, and turn visitors into enquiries.",
+    detail: ["Business website", "Service presentation", "Responsive design", "Lead generation"],
     liveUrl: "https://webdev-emmy-5644.vercel.app/",
+    caseStudyUrl: "https://taiwo-s-digital-studio.vercel.app/projects/webdev-site",
     image: webdevSiteImage,
     imageAlt: "Webdev brand website preview with a blue gradient accent",
   },
