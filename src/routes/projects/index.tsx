@@ -25,7 +25,7 @@ function ProjectCard({ project, delay }: { project: ProjectEntry; delay: number 
           <div className="mt-5 flex flex-wrap gap-2">{project.detail.map(d => <span key={d} className="rounded-md border border-border px-2 py-1 text-[11px] text-muted-foreground">{d}</span>)}</div>
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
             {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">Visit live site <ArrowUpRight className="size-4" /></a>}
-            <a href={`/projects/${project.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">Case study <ArrowRight className="size-4" /></a>
+            <a href={project.caseStudyUrl ?? `/projects/${project.slug}`} {...(project.caseStudyUrl ? { target: "_blank", rel: "noreferrer" } : {})} className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground">Case study <ArrowRight className="size-4" /></a>
           </div>
         </div>
       </article>
